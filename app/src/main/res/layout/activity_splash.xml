@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/backg"
-    android:background="@color/orange_500"
-    app:gest_maxZoom="1.5"
+     app:gest_maxZoom="1.5"
     app:gest_overscrollX="32dp"
     android:fitsSystemWindows="false"
     app:gest_overscrollY="32dp"
@@ -24,7 +23,7 @@
         android:weightSum="5"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/title_cont"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
@@ -35,27 +34,31 @@
             android:layout_height="0dp"
             >
 
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/ic_logo_animated" />
-
             <com.daniribalbert.customfontlib.views.CustomFontTextView
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_height="wrap_content"
                 app:font="Avenir-Medium"
-                android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
                 android:id="@+id/title"
-                android:textSize="32sp" />
-        </LinearLayout>
+                android:textSize="32sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/logo" />
+
+            <ImageView
+                android:layout_alignParentLeft="true"
+                android:id="@+id/logo"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_logo_animated" />
+
+
+        </RelativeLayout>
 
         <RelativeLayout
+
 
             android:id="@+id/pager_container"
             android:layout_weight="3.95"

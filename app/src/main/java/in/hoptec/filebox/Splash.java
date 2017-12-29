@@ -1,14 +1,10 @@
 package in.hoptec.filebox;
 
-import android.animation.Animator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.annotation.ColorRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +13,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -52,7 +47,7 @@ public class Splash extends AppCompatActivity {
             ((Animatable) drawable).start();
         }
 
-        TextView textView = (TextView) findViewById(R.id.title);
+        final TextView textView = (TextView) findViewById(R.id.title);
         Spannable word = new SpannableString("File");
 
         word.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), 0, word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -62,8 +57,22 @@ public class Splash extends AppCompatActivity {
 
         wordTwo.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.material_lime_300)), 0, wordTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.append(wordTwo);
+
+        final Animation myAnim2 = AnimationUtils.loadAnimation(ctx, R.anim.translate_x);
+
+
+                textView.startAnimation(myAnim2);
+
+
+
+
         bg=findViewById(R.id.backg);
         title_cont=findViewById(R.id.title_cont);
+
+        Animation myAnim = AnimationUtils.loadAnimation(ctx, R.anim.zoom_anim);
+
+        title_cont.startAnimation(myAnim);
+
 
         pager_container=findViewById(R.id.pager_container);
         pager_container.setVisibility(View.GONE);
@@ -78,11 +87,6 @@ public class Splash extends AppCompatActivity {
                     ((Animatable) drawable).stop();
                 }
 
-                Animation myAnim = AnimationUtils.loadAnimation(ctx, R.anim.translate);
-
-               // title_cont.startAnimation(myAnim);
-
-
                 pager_container.setVisibility(View.VISIBLE);
 
 
@@ -94,9 +98,9 @@ public class Splash extends AppCompatActivity {
 
 
             }
-        },2000);
+        },3000);
         setUpIntro();
-        utl.animateBackGround(bg,curSt,"#0a7e07",false,dur);
+        utl.animateBackGround(bg,curSt,colorsS[0],false,dur);
         curSt="#0a7e07";
 
 
@@ -131,8 +135,8 @@ public class Splash extends AppCompatActivity {
 
     Integer dur=1000;
     public static  HelpPagerAdapter pageAdapter;
-    String curSt="#056f00";
-    String  colorsS [] ={"#ff0b8043","#ffc53929","#ff3367d6"};
+    String curSt="#ffff5252";
+    String  colorsS [] ={"#ffc53929","#ff0b8043","#ff3367d6"};
     public void setUpIntro()
     {
 
@@ -145,8 +149,8 @@ public class Splash extends AppCompatActivity {
 
         colors=new ArrayList<>();
 
-        colors.add(R.color.material_green_700);
         colors.add(R.color.material_deep_orange_700);
+        colors.add(R.color.material_green_700);
         colors.add(R.color.material_blue_700);
 
 
@@ -160,7 +164,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                utl.l("Pos : "+position+"\n Offset : "+positionOffset+"\n Pix "+positionOffsetPixels);
+               // utl.l("Pos : "+position+"\n Offset : "+positionOffset+"\n Pix "+positionOffsetPixels);
 
             }
 
@@ -209,6 +213,7 @@ public class Splash extends AppCompatActivity {
         @Override
         public void curPos(float pos) {
 
+            utl.l("POS "+pos);
             if(init_pos>pos)
                 title_cont.setY(pos-200);
 
@@ -220,7 +225,7 @@ public class Splash extends AppCompatActivity {
 
         Help_Fr0 frag=new Help_Fr0();
 
-        frag.image=R.drawable.ic_folder_open_48px;
+        frag.image=R.drawable.ic_help_animated_file;
         frag.message="No more storming your gallery to find files ," +
                 " Organise your documents and Images in buckets to reach easily .";
         frag.islast=false;
@@ -231,7 +236,7 @@ public class Splash extends AppCompatActivity {
         /***/
         frag=new Help_Fr0();
 
-        frag.image=R.drawable.ic_vpn_key_48px;
+        frag.image=R.drawable.ic_help_animated_lock;
         frag.message="Hide you private Files and Photos with smart lock from Gallery and Spy Apps.";
         frag.islast=false;
         frag.clr=colors.get(1);
@@ -242,7 +247,7 @@ public class Splash extends AppCompatActivity {
         /***/
         frag=new Help_Fr0();
 
-        frag.image=R.drawable.ic_folder_open_48px;
+        frag.image=R.drawable.ic_help_animated_cloud;
         frag.message="Save important files on Cloud with Easy Sharing !";
         frag.islast=true;
         frag.clr=colors.get(2);

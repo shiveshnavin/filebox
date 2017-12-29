@@ -27,7 +27,6 @@ import in.hoptec.filebox.Splash;
 
 public class Help_Fr0 extends Fragment {
 
-    public static View curv;
 
     public boolean islast=false;
     public int clr;
@@ -72,26 +71,15 @@ public class Help_Fr0 extends Fragment {
 
        final  View v = inflater.inflate(R.layout.fragment_help, container, false);
 
-        curv=v;
-
-        v.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-
-                    @SuppressLint("NewApi")
-                    @Override
-                    public void onGlobalLayout() {
-
-                       cb.curPos(v.getY());
-
-                    }
-                });
-
-
 
         TextView messageTextView = (TextView)v.findViewById(R.id.desc);
         AppCompatButton btn=(AppCompatButton)v.findViewById(R.id.next);
 
-        btn.setSupportBackgroundTintList(ContextCompat.getColorStateList(mActivity, clr));
+        try {
+            btn.setSupportBackgroundTintList(ContextCompat.getColorStateList(mActivity, clr));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if(islast)
         {
