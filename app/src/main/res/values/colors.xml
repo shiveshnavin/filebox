@@ -7,7 +7,7 @@
     <color name="colorAccent">#448AFF</color>
 
 
-    <color name="ic_fill">@color/grey_700</color>
+    <color name="ic_fill">@color/grey_600</color>
 
     <color name="blue_guide">#FF1976D2</color>
 

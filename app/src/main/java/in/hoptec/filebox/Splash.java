@@ -55,10 +55,11 @@ public class Splash extends AppCompatActivity {
         textView.setText(word);
         Spannable wordTwo = new SpannableString("Box");
 
-        wordTwo.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.material_lime_300)), 0, wordTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordTwo.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.material_green_300)), 0, wordTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.append(wordTwo);
 
         final Animation myAnim2 = AnimationUtils.loadAnimation(ctx, R.anim.translate_x);
+        myAnim2.setDuration(getResources().getInteger(R.integer.spl_dur)/2);
 
 
                 textView.startAnimation(myAnim2);
@@ -98,7 +99,7 @@ public class Splash extends AppCompatActivity {
 
 
             }
-        },3000);
+        },getResources().getInteger(R.integer.spl_dur_ttl) );
         setUpIntro();
         utl.animateBackGround(bg,curSt,colorsS[0],false,dur);
         curSt="#0a7e07";
@@ -208,17 +209,6 @@ public class Splash extends AppCompatActivity {
 
     }
 
-
-    Help_Fr0.TransCallback cb=new Help_Fr0.TransCallback() {
-        @Override
-        public void curPos(float pos) {
-
-            utl.l("POS "+pos);
-            if(init_pos>pos)
-                title_cont.setY(pos-200);
-
-        }
-    };
     private List<Fragment> getFragments() {
 
         List<Fragment> fList = new ArrayList<Fragment>();
@@ -230,8 +220,7 @@ public class Splash extends AppCompatActivity {
                 " Organise your documents and Images in buckets to reach easily .";
         frag.islast=false;
         frag.clr=colors.get(0);
-        frag.cb=cb;
-        fList.add(frag);
+         fList.add(frag);
 
         /***/
         frag=new Help_Fr0();
@@ -240,8 +229,7 @@ public class Splash extends AppCompatActivity {
         frag.message="Hide you private Files and Photos with smart lock from Gallery and Spy Apps.";
         frag.islast=false;
         frag.clr=colors.get(1);
-        frag.cb=cb;
-        fList.add(frag);
+         fList.add(frag);
 
 
         /***/
@@ -251,8 +239,7 @@ public class Splash extends AppCompatActivity {
         frag.message="Save important files on Cloud with Easy Sharing !";
         frag.islast=true;
         frag.clr=colors.get(2);
-        frag.cb=cb;
-        fList.add(frag);
+         fList.add(frag);
 
 
 

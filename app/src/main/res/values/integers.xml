@@ -2,5 +2,6 @@
 <resources>
 
     <integer name="spl_dur">1500</integer>
+    <integer name="spl_dur_ttl">3500</integer>
 
 </resources>

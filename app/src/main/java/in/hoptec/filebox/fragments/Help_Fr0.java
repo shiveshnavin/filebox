@@ -32,11 +32,6 @@ public class Help_Fr0 extends Fragment {
     public int clr;
     public int image;
     public String message;
-    public TransCallback cb;
-
-    public static interface TransCallback{
-        public void curPos(float pos);
-    }
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 
