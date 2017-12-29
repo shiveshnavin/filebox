@@ -25,10 +25,12 @@
         android:orientation="vertical" >
 
         <LinearLayout
+            android:id="@+id/title_cont"
             android:layout_marginTop="30dp"
+            android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             >
@@ -41,27 +43,40 @@
 
             <com.daniribalbert.customfontlib.views.CustomFontTextView
                 android:layout_width="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:font="Roboto-Regular"
+                app:font="Avenir-Medium"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
+                android:id="@+id/title"
                 android:textSize="32sp" />
         </LinearLayout>
 
+        <RelativeLayout
 
-        <android.support.v4.view.ViewPager
-            android:overScrollMode="never"
-            android:layout_weight="4"
-            android:id="@+id/help_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:id="@+id/pager_container"
+            android:layout_weight="3.95"
+            android:layout_height="0dp"
+            android:layout_width="match_parent">
 
-        </android.support.v4.view.ViewPager>
+            <android.support.v4.view.ViewPager
+                android:overScrollMode="never"
+                android:id="@+id/help_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+            </android.support.v4.view.ViewPager>
+
+            <me.relex.circleindicator.CircleIndicator
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                 android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
 
     </LinearLayout>

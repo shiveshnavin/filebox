@@ -5,7 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_margin="50dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:background="@drawable/round_bg_white"
         android:gravity="center"
         android:orientation="vertical"
@@ -33,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:id="@+id/desc" />
 
 

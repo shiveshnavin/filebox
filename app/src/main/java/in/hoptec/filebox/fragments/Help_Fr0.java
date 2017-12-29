@@ -1,5 +1,6 @@
 package in.hoptec.filebox.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable;
@@ -13,10 +14,12 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import in.hoptec.filebox.R;
+import in.hoptec.filebox.Splash;
 
 /**
  * Created by shivesh on 29/12/17.
@@ -24,7 +27,17 @@ import in.hoptec.filebox.R;
 
 public class Help_Fr0 extends Fragment {
 
-    @DrawableRes public int image;
+    public static View curv;
+
+    public boolean islast=false;
+    public int clr;
+    public int image;
+    public String message;
+    public TransCallback cb;
+
+    public static interface TransCallback{
+        public void curPos(float pos);
+    }
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 
@@ -45,25 +58,63 @@ public class Help_Fr0 extends Fragment {
     }
 
 
+
     Activity mActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        String message = getArguments().getString(EXTRA_MESSAGE);
-        int image = getArguments().getInt("img");
-        int clr = getArguments().getInt("clr");
-        boolean islast = getArguments().getBoolean("islast");
+
+
 
         mActivity =getActivity();
 
 
-        View v = inflater.inflate(R.layout.fragment_help, container, false);
+       final  View v = inflater.inflate(R.layout.fragment_help, container, false);
+
+        curv=v;
+
+        v.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                    @SuppressLint("NewApi")
+                    @Override
+                    public void onGlobalLayout() {
+
+                       cb.curPos(v.getY());
+
+                    }
+                });
+
+
 
         TextView messageTextView = (TextView)v.findViewById(R.id.desc);
         AppCompatButton btn=(AppCompatButton)v.findViewById(R.id.next);
 
         btn.setSupportBackgroundTintList(ContextCompat.getColorStateList(mActivity, clr));
+
+        if(islast)
+        {
+            btn.setText("LAUNCH");
+        }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!islast&&Splash.curItem<Splash.pageAdapter.getCount()-1)
+                {
+                    Splash.pager.setCurrentItem(Splash.curItem+1,true);
+                }
+
+                if(islast)
+                {
+                    Splash.pager.setCurrentItem(0,true);
+
+                }
+
+            }
+        });
+
 
         ImageView img = (ImageView)v.findViewById(R.id.img);
         img.setImageResource(image);
