@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -35,16 +36,20 @@ public class Splash extends AppCompatActivity {
 
     ArrayList<Integer> colors;
 
+    Integer dur=1000;
     HelpPagerAdapter pageAdapter;
+    String curSt="#455ede";
     public void setUpIntro()
     {
+       final  View bg=findViewById(R.id.backg);
 
         colors=new ArrayList<>();
 
+        colors.add(R.color.green_700);
         colors.add(R.color.accent);
-        colors.add(R.color.accent);
-        colors.add(R.color.accent);
+        colors.add(R.color.blue_700);
 
+        utl.animateBackGround(bg,curSt,"#0a7e07",false,dur);
 
         List<Fragment> fragments = getFragments();
         pageAdapter = new HelpPagerAdapter(getSupportFragmentManager(), fragments);
@@ -64,6 +69,25 @@ public class Splash extends AppCompatActivity {
             public void onPageSelected(int position) {
 
                 utl.l("Page Sel : "+position);
+
+                switch (position)
+                {
+                    case 0:
+                        utl.animateBackGround(bg,curSt,"#0a7e07",false,dur);
+                        curSt="#0a7e07";
+
+                        break;
+                    case 1:
+                        utl.animateBackGround(bg,curSt,"#F57F17",false,dur);
+                        curSt="#F57F17";
+
+                        break;
+                    case 2:
+                        utl.animateBackGround(bg,curSt,"#455ede",false,dur);
+                        curSt="#455ede";
+
+                        break;
+                }
 
             }
 
