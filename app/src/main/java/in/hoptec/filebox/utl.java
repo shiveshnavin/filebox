@@ -62,8 +62,7 @@ import java.util.Map;
 import java.util.UUID;
 
 
-import in.htec.visitrec.utils.FileOperations;
-import in.htec.visitrec.utils.GenricCallback;
+import in.hoptec.filebox.utils.GenricCallback;
 
 import static android.content.Context.MODE_PRIVATE;
 

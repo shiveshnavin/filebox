@@ -5,20 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:padding="10dp"
+        android:layout_margin="50dp"
         android:background="@drawable/round_bg_white"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
-            android:src="@drawable/ic_folder_open_48px"
+            android:src="@drawable/ic_logo_animated"
             android:id="@+id/img"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginBottom="40dp" />
+            android:layout_marginBottom="60dp" />
 
 
         <com.daniribalbert.customfontlib.views.CustomFontTextView
