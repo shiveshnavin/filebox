@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
@@ -35,6 +36,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -44,7 +46,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -811,6 +812,27 @@ public class utl {
     public static final String MY_PREFS_NAME = "wootwoot";
     public static  SharedPreferences.Editor editor;// = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
+    public static void setKey(String k,String v,Context ctx)
+    {
+
+        utl.l("KEY SET Key:  -"+k+ "- VAL: "+v);
+        editor = ctx.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString(k,v);
+
+        editor.commit();
+
+    }
+
+    public static String getKey(String k,Context ctx)
+    {
+        SharedPreferences prefs = ctx.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        String restoredText = prefs.getString(k, null);
+
+        utl.l("KEY GET : "+k+" VAL: "+restoredText);
+
+        return restoredText;
+    }
+
     public static void setShared(Context ctx)
     {
         /*
@@ -842,6 +864,7 @@ public class utl {
         }
 
     }
+
 
     public static void copyFile(File src,File dst)
     {
@@ -1055,8 +1078,8 @@ public class utl {
                 final Window window = dialog.getWindow();
                 window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
                 window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                window.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
-                dialog.getWindow().getAttributes().alpha = 0.7f;
+                window.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(ctx,R.color.transblack2)));
+                //dialog.getWindow().getAttributes().alpha = 0.7f;
 
 
                 dialog.setContentView(R.layout.gen_load);
@@ -1065,8 +1088,24 @@ public class utl {
                 dialog.setCancelable(true);
 
                 dialog.show();
+
+                ImageView mIcDownloadAnimator = (ImageView) dialog.findViewById(R.id.loading);
+                final Drawable drawable = mIcDownloadAnimator.getDrawable();
+
+                if (drawable instanceof Animatable) {
+                    ((Animatable) drawable).start();
+                }
+
+
+                Animation rotation = AnimationUtils.loadAnimation(ctx, R.anim.rot_3d);
+                rotation.setFillAfter(true);
+                mIcDownloadAnimator.startAnimation(rotation);
+
+/*
+
                 AVLoadingIndicatorView splashView=(AVLoadingIndicatorView)dialog.findViewById(R.id.splash_view2);
                 splashView.show();
+*/
 
 
             }

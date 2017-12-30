@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:id="@+id/ll"
     android:layout_gravity="center"
-    android:background="#05cfd8dc"
+    android:background="#16bdbdbd"
     android:layout_width="match_parent"
     android:gravity="center"
     android:layout_height="match_parent">
@@ -21,17 +21,14 @@
 
 
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/splash_view2"
+    <ImageView
+        android:id="@+id/loading"
         android:layout_gravity="center"
-
-         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/AVLoadingIndicatorView"
-        android:visibility="visible"
-        app:indicatorName="LineScalePartyIndicator"
-        app:indicatorColor="@color/red_700"
+        android:src="@drawable/loading_anim"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         />
+
 
 
 

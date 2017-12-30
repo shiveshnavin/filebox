@@ -40,6 +40,7 @@ public class Splash extends AppCompatActivity {
         ctx=this;
         act=this;
 
+        utl.showDig(true,ctx);
         ImageView mIcDownloadAnimator = (ImageView) findViewById(R.id.logo);
        final Drawable drawable = mIcDownloadAnimator.getDrawable();
 
