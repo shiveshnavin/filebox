@@ -823,7 +823,7 @@ public class utl {
 
 
 
-    public static final String MY_PREFS_NAME = "wootwoot";
+    public static final String MY_PREFS_NAME = "filebox";
     public static  SharedPreferences.Editor editor;// = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
     public static void setKey(String k,String v,Context ctx)

@@ -4,6 +4,7 @@ import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -55,9 +56,9 @@ public class Splash extends AppCompatActivity {
 
         ctx=this;
         act=this;
+        mAuth = FirebaseAuth.getInstance();
 
-        utl.showDig(true,ctx);
-        ImageView mIcDownloadAnimator = (ImageView) findViewById(R.id.logo);
+         ImageView mIcDownloadAnimator = (ImageView) findViewById(R.id.logo);
        final Drawable drawable = mIcDownloadAnimator.getDrawable();
 
         if (drawable instanceof Animatable) {
@@ -102,29 +103,47 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
 
-                if (drawable instanceof Animatable) {
+                if(utl.getKey("firstinstall",ctx)==null)
+                {
 
-                    ((Animatable) drawable).stop();
+                    if (drawable instanceof Animatable) {
+
+                        ((Animatable) drawable).stop();
+                    }
+
+                    pager_container.setVisibility(View.VISIBLE);
+
+
+                    Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slid_up);
+                    animation.setDuration(500);
+                    animation.setStartOffset(0);
+
+                    pager_container.startAnimation(animation);
+
+                    if(!firebaseOK&&utl.isConnected())
+                    {
+                        utl.showDig(true,ctx);
+                    }
+
+
+                    setUpIntro();
+
+                }
+                else {
+                    Intent intent=new Intent(ctx, Home.class);
+                    startActivity(intent);
+                    finish();
+
                 }
 
-                pager_container.setVisibility(View.VISIBLE);
 
+              utl.setKey("firstinstall","1",ctx);
 
-                Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slid_up);
-                animation.setDuration(500);
-                animation.setStartOffset(0);
-
-                pager_container.startAnimation(animation);
-
-              /*  if(!firebaseOK&&utl.isConnected())
-                    utl.showDig(true,ctx);
-*/
 
 
 
             }
         },getResources().getInteger(R.integer.spl_dur_ttl) );
-        setUpIntro();
         utl.animateBackGround(bg,curSt,colorsS[0],false,dur);
         curSt="#0a7e07";
 
@@ -150,7 +169,6 @@ public class Splash extends AppCompatActivity {
 
         setUpAnaly();
         setUpPermissions();
-        setUpAuth();
 
     }
 
@@ -347,7 +365,6 @@ public class Splash extends AppCompatActivity {
 
     public void setUpAuth()
     {
-        mAuth = FirebaseAuth.getInstance();
 
         utl.l("Authenticatiog ");
         mAuth.signInAnonymously()
@@ -407,6 +424,11 @@ public class Splash extends AppCompatActivity {
     {
         if(currentUser!=null)
           firebaseOK=true;
+        else
+        {
+            setUpAuth();
+
+        }
 
         utl.l("isAuthenticated : "+firebaseOK);
 

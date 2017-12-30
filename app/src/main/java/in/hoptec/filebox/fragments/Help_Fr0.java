@@ -2,6 +2,7 @@ package in.hoptec.filebox.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import in.hoptec.filebox.Home;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.Splash;
 import in.hoptec.filebox.utl;
@@ -98,7 +100,9 @@ public class Help_Fr0 extends Fragment {
 
                 if(islast)
                 {
-                    Splash.pager.setCurrentItem(0,true);
+                   // Splash.pager.setCurrentItem(0,true);
+                    Intent intent=new Intent(getContext(), Home.class);
+                    startActivity(intent);
 
                 }
 
