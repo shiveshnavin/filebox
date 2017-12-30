@@ -1,8 +1,0 @@
-<animated-vector
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/ts_circle">
-
-    <target android:name="text"
-        android:animation="@animator/ts_trim_path">
-    </target>
-</animated-vector>
