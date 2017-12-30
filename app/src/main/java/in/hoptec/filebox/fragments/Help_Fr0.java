@@ -104,7 +104,7 @@ public class Help_Fr0 extends Fragment {
         Drawable drawable = img.getDrawable();
 
         if (drawable instanceof Animatable) {
-            ((Animatable) drawable).start();
+           // ((Animatable) drawable).start();
         }
 
         messageTextView.setText(message);

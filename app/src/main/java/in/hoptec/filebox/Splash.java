@@ -47,14 +47,6 @@ public class Splash extends AppCompatActivity {
             ((Animatable) drawable).start();
         }
 
-        ImageView mIcDownloadAnimator2 = (ImageView) findViewById(R.id.title_im);
-        final Drawable drawable2 = mIcDownloadAnimator2.getDrawable();
-
-        if (drawable2 instanceof Animatable) {
-            ((Animatable) drawable2).start();
-        }
-
-
         final TextView textView = (TextView) findViewById(R.id.title);
         Spannable word = new SpannableString("File");
 
@@ -93,7 +85,7 @@ public class Splash extends AppCompatActivity {
 
                 if (drawable instanceof Animatable) {
 
-                   // ((Animatable) drawable).stop();
+                    ((Animatable) drawable).stop();
                 }
 
                 pager_container.setVisibility(View.VISIBLE);
@@ -233,7 +225,7 @@ public class Splash extends AppCompatActivity {
         /***/
         frag=new Help_Fr0();
 
-        frag.image=R.drawable.svd_an;
+        frag.image=R.drawable.ic_help_animated_lock;
         frag.message="Hide you private Files and Photos with smart lock from Gallery and Spy Apps.";
         frag.islast=false;
         frag.clr=colors.get(1);

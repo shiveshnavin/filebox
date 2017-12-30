@@ -5,6 +5,6 @@
     tools:targetApi="lollipop">
 
     <target android:name="text"
-        android:animation="@animator/ts_trim_path">
+        android:animation="@animator/ic_app_animator">
     </target>
 </animated-vector>
