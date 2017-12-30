@@ -1,0 +1,14 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <group android:name="help_f">
+        <path
+            android:fillColor="@color/amber_100"
+            android:name="path"
+            android:pathData="M 40 12 L 24 12 L 20 8 L 8 8 C 5.79 8 4.02 9.79 4.02 12 L 4 36 C 4 38.21 5.79 40 8 40 L 40 40 C 42.21 40 44 38.21 44 36 L 44 16 C 44 13.79 42.21 12 40 12 Z M 40 36 L 8 36 L 8 16 L 40 16 L 40 36 Z"/>
+    </group>
+</vector>

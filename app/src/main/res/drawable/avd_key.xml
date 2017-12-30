@@ -1,10 +1,10 @@
 <animated-vector
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:drawable="@drawable/ic_app_name"
+    android:drawable="@drawable/vc_key"
     tools:targetApi="lollipop">
 
-    <target android:name="text"
-        android:animation="@animator/ts_trim_path">
+    <target android:name="help_k"
+        android:animation="@animator/ts_key_path">
     </target>
 </animated-vector>
