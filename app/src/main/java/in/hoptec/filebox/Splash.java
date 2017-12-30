@@ -1,10 +1,15 @@
 package in.hoptec.filebox;
 
+import android.*;
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,11 +17,20 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,6 +142,9 @@ public class Splash extends AppCompatActivity {
 
 
 
+        setUpAnaly();
+        setUpPermissions();
+        setUpAuth();
 
     }
 
@@ -252,6 +269,140 @@ public class Splash extends AppCompatActivity {
 
         return fList;
      }
+
+
+
+
+
+
+
+    boolean permissionOK=false,firebaseOK=false;
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    public void setUpPermissions()
+    {
+
+        ActivityCompat.requestPermissions(act,
+                new String[]{
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WAKE_LOCK,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.ACCESS_NETWORK_STATE,
+                        Manifest.permission.ACCESS_WIFI_STATE,
+                        Manifest.permission.INTERNET,
+                },
+                1);
+
+
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        &&grantResults[2] == PackageManager.PERMISSION_GRANTED  && grantResults[0] == PackageManager.PERMISSION_GRANTED  && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                    permissionOK=true;
+
+
+                } else {
+
+                    Toast.makeText(ctx, "Permission denied to R/W your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+    /*****************Firebase*****************/
+
+    public String TAG="Splash";
+    private FirebaseAuth mAuth;
+
+    public void setUpAuth()
+    {
+        mAuth = FirebaseAuth.getInstance();
+
+        utl.showDig(true,ctx);
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        utl.showDig(false,ctx);
+
+
+
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInAnonymously:failure", task.getException());
+                            Toast.makeText(ctx, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+
+
+
+    }
+
+
+    private FirebaseAnalytics mFirebaseAnalytics;
+
+    public void setUpAnaly()
+    {
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+
+
+    }
+
+
+
+    public void updateUI(FirebaseUser currentUser)
+    {
+        if(currentUser!=null)
+          firebaseOK=true;
+
+        utl.l("isAuthenticated : "+firebaseOK);
+
+
+    }
+
+
+
+
+
+
 
 
     }
