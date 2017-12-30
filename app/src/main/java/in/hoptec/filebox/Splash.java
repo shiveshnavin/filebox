@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -31,6 +32,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +115,10 @@ public class Splash extends AppCompatActivity {
                 animation.setStartOffset(0);
 
                 pager_container.startAnimation(animation);
+
+                if(!firebaseOK)
+                    utl.showDig(true,ctx);
+
 
 
 
@@ -343,7 +349,6 @@ public class Splash extends AppCompatActivity {
     {
         mAuth = FirebaseAuth.getInstance();
 
-        utl.showDig(true,ctx);
         mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -353,10 +358,19 @@ public class Splash extends AppCompatActivity {
 
 
 
+
+
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+                            UserProfileChangeRequest request=new UserProfileChangeRequest.Builder().setDisplayName(Build.MODEL).build();
+                            user.updateEmail(utl.refineString(Build.MODEL,"_")+"@hoptec.in");
+                            user.updateProfile(request);
+
+
+
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
