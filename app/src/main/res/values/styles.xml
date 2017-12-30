@@ -18,6 +18,14 @@
     </style>
 
 
+    <style name="drawer" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="colorPrimary">@color/drawer_clr_txt</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
     <style name="FullScreen" parent="Theme.AppCompat.NoActionBar">
 
         <item name="colorPrimary">@color/colorPrimary</item>

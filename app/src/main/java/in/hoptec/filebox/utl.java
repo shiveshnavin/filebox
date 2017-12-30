@@ -73,6 +73,9 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class utl {
 
+    public static boolean ANIM_LV1_ENABLED=true;
+
+
 
     public static boolean DISPLAY_ENABLED=true;
     public static boolean DEBUG_ENABLED=true;

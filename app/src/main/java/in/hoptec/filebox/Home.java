@@ -1,5 +1,8 @@
 package in.hoptec.filebox;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,12 +13,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
+
+    public int CUR_STATE=States.HOME;
+
+    public static class States{
+
+        public static int HOME=1;
+        public static int ADD_BUCKET=2;
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +39,37 @@ public class Home extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+       final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                if(CUR_STATE==States.HOME)
+                {
+                    CUR_STATE=States.ADD_BUCKET;
+                    fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_green_500)));
+
+                    fab.setImageResource(R.drawable.ic_check_white_48dp);
+                }
+                else {
+                    CUR_STATE=States.HOME;
+                    fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+
+                    fab.setImageResource(R.drawable.ic_add_white_48dp);
+
+                }
+
+
+
+
+
+
+
+
             }
         });
 
@@ -43,7 +83,22 @@ public class Home extends AppCompatActivity {
 
     public void initNavigationDrawer() {
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
+       final NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
+
+        navigationView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                ImageView mIcDownloadAnimator = (ImageView) findViewById(R.id.logo);
+                final Drawable drawable = mIcDownloadAnimator.getDrawable();
+
+                if (drawable instanceof Animatable && utl.ANIM_LV1_ENABLED) {
+                    ((Animatable) drawable).start();
+                }
+
+            }
+        },400);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
@@ -53,6 +108,10 @@ public class Home extends AppCompatActivity {
                 switch (id){
                     case R.id.home:
                         Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.box:
+                        Toast.makeText(getApplicationContext(),"Boxes",Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.settings:
