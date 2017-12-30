@@ -393,9 +393,9 @@ public class Splash extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            Toast.makeText(ctx, "Authentication failed.",
+                          /*  Toast.makeText(ctx, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                           */ updateUI(null);
                         }
 
                         // ...
