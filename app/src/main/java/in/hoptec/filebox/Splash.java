@@ -116,9 +116,9 @@ public class Splash extends AppCompatActivity {
 
                 pager_container.startAnimation(animation);
 
-                if(!firebaseOK)
+              /*  if(!firebaseOK&&utl.isConnected())
                     utl.showDig(true,ctx);
-
+*/
 
 
 
@@ -349,6 +349,7 @@ public class Splash extends AppCompatActivity {
     {
         mAuth = FirebaseAuth.getInstance();
 
+        utl.l("Authenticatiog ");
         mAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

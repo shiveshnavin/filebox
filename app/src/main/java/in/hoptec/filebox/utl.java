@@ -365,7 +365,21 @@ public class utl {
 
     }
 
+    public static boolean isConnected()
+    {
+        boolean isCon=false;
+        try {
+            String command = "ping -c 1 google.com";
+            isCon= (Runtime.getRuntime().exec (command).waitFor() == 0);
+        } catch ( Exception e) {
 
+            e.printStackTrace();
+            isCon= false;
+        }
+
+        utl.l("isConnected : "+isCon);
+        return isCon;
+    }
 
     public static int getApkVerison(Context ctx)
     {
