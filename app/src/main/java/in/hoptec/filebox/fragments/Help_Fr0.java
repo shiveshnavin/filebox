@@ -70,9 +70,11 @@ public class Help_Fr0 extends Fragment {
 
 
         TextView messageTextView = (TextView)v.findViewById(R.id.desc);
+
         AppCompatButton btn=(AppCompatButton)v.findViewById(R.id.next);
 
-        try {
+        try {  messageTextView.setTextColor((ContextCompat.getColor(getContext(),clr)));
+
             btn.setSupportBackgroundTintList(ContextCompat.getColorStateList(mActivity, clr));
         } catch (Exception e) {
             e.printStackTrace();
