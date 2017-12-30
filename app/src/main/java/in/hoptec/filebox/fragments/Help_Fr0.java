@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.Splash;
+import in.hoptec.filebox.utl;
 
 /**
  * Created by shivesh on 29/12/17.
@@ -28,6 +29,7 @@ import in.hoptec.filebox.Splash;
 public class Help_Fr0 extends Fragment {
 
 
+    public int pos=0;
     public boolean islast=false;
     public int clr;
     public int image;
@@ -101,6 +103,7 @@ public class Help_Fr0 extends Fragment {
 
         ImageView img = (ImageView)v.findViewById(R.id.img);
         img.setImageResource(image);
+        utl.changeColorDrawable(img,clr);
         Drawable drawable = img.getDrawable();
 
         if (drawable instanceof Animatable) {

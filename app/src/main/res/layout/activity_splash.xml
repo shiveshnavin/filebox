@@ -25,7 +25,6 @@
 
         <RelativeLayout
             android:id="@+id/title_cont"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_gravity="center"

@@ -94,6 +94,7 @@ public class Splash extends AppCompatActivity {
 
 
                 Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slid_up);
+                animation.setDuration(500);
                 animation.setStartOffset(0);
 
                 pager_container.startAnimation(animation);
@@ -139,7 +140,7 @@ public class Splash extends AppCompatActivity {
     Integer dur=1000;
     public static  HelpPagerAdapter pageAdapter;
     String curSt="#ffff5252";
-    String  colorsS [] ={"#ffc53929","#ff0b8043","#ff3367d6"};
+    public static String  colorsS [] ={"#ffc53929","#ff0b8043","#ff3367d6"};
     public void setUpIntro()
     {
 
@@ -221,6 +222,7 @@ public class Splash extends AppCompatActivity {
         frag.message="No more storming your gallery to find files ," +
                 " Organise your documents and Images in buckets to reach easily .";
         frag.islast=false;
+        frag.pos=0;
         frag.clr=colors.get(0);
          fList.add(frag);
 
@@ -230,6 +232,7 @@ public class Splash extends AppCompatActivity {
         frag.image=R.drawable.ic_help_animated_lock;
         frag.message="Hide you private Files and Photos with smart lock from Gallery and Spy Apps.";
         frag.islast=false;
+        frag.pos=1;
         frag.clr=colors.get(1);
          fList.add(frag);
 
@@ -240,6 +243,7 @@ public class Splash extends AppCompatActivity {
         frag.image=R.drawable.ic_help_animated_cloud;
         frag.message="Save important files on Cloud with Easy Sharing !";
         frag.islast=true;
+        frag.pos=2;
         frag.clr=colors.get(2);
          fList.add(frag);
 
