@@ -36,7 +36,7 @@
 
 
             <ImageView
-                android:gravity="center"
+                android:gravity="left"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/logo"
                 android:id="@+id/title_im"

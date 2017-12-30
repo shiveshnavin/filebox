@@ -62,8 +62,10 @@ public class Splash extends AppCompatActivity {
         myAnim2.setDuration(getResources().getInteger(R.integer.spl_dur)/2);
 
 
-                textView.startAnimation(myAnim2);
+               // textView.startAnimation(myAnim2);
+        ImageView mIcDownloadAnimator2 = (ImageView) findViewById(R.id.title_im);
 
+        mIcDownloadAnimator2.startAnimation(myAnim2);
 
 
 
