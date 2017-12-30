@@ -47,6 +47,14 @@ public class Splash extends AppCompatActivity {
             ((Animatable) drawable).start();
         }
 
+        ImageView mIcDownloadAnimator2 = (ImageView) findViewById(R.id.title_im);
+        final Drawable drawable2 = mIcDownloadAnimator2.getDrawable();
+
+        if (drawable2 instanceof Animatable) {
+            ((Animatable) drawable2).start();
+        }
+
+
         final TextView textView = (TextView) findViewById(R.id.title);
         Spannable word = new SpannableString("File");
 
