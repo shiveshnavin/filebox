@@ -49,6 +49,8 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
                 click(pos);
             }
         });
+        final Animation press= AnimationUtils.loadAnimation(mContext,R.anim.rec_zoom_in);
+        final Animation release= AnimationUtils.loadAnimation(mContext,R.anim.rec_zoom_nomal);
 
         customViewHolder.base.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -57,13 +59,15 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
 
-                        Animation animation= AnimationUtils.loadAnimation(mContext,R.anim.rec_zoom_in);
-                        customViewHolder.base.startAnimation(animation);
+                        customViewHolder.base.startAnimation(press);
                         break;
                     case MotionEvent.ACTION_UP:
 
-                        Animation animation2= AnimationUtils.loadAnimation(mContext,R.anim.rec_zoom_nomal);
-                        customViewHolder.base.startAnimation(animation2);
+                        customViewHolder.base.startAnimation(release);
+
+                    case MotionEvent.ACTION_CANCEL:
+
+                        customViewHolder.base.startAnimation(release);
 
 
 

@@ -4,5 +4,5 @@
     <integer name="spl_dur">1500</integer>
     <integer name="spl_dur_ttl">3500</integer>
 
-    <integer name="rec_zoom_dur">600</integer>
+    <integer name="rec_zoom_dur">200</integer>
 </resources>
