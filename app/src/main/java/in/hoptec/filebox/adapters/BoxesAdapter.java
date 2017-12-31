@@ -1,6 +1,8 @@
 package in.hoptec.filebox.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -90,6 +93,15 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
             @Override
             public boolean onLongClick(View view) {
 
+
+
+                final Drawable drawable = customViewHolder.del.getDrawable();
+
+                if (drawable instanceof Animatable) {
+                    ((Animatable) drawable).start();
+                }
+
+
                 clickLong(pos);
                 return true;
             }
@@ -107,6 +119,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
     {
 
         TextView textView;
+        ImageView del,icon;
         View base;
         LinearLayout root;
 
@@ -117,7 +130,8 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
             base=v;
             textView=(TextView) base.findViewById(R.id.name);
             root=(LinearLayout) base.findViewById(R.id.root);
-
+            del=(ImageView) base.findViewById(R.id.del);
+            icon=(ImageView) base.findViewById(R.id.icon);
             
             
 
@@ -130,13 +144,12 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
 
 
 
+
     }
 
 
     public void clickLong(int pos)
     {
-
-
 
 
     }
@@ -147,7 +160,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
         
         public String getData(int i)
         {
-            return "Data : "+i;
+            return "Bucket No "+i;
         }
         
     }
