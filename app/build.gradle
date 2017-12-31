@@ -43,6 +43,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'me.relex:circleindicator:1.2.2@aar'
+    compile 'jp.wasabeef:recyclerview-animators:2.2.7'
+
 
     //network
     compile 'com.amitshekhar.android:android-networking:0.0.1'
