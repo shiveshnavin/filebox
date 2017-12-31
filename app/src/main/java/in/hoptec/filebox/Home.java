@@ -6,8 +6,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentContainer;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import in.hoptec.filebox.fragments.AddToBox;
+import in.hoptec.filebox.fragments.HomeFragment;
 
 public class Home extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -29,14 +31,14 @@ public class Home extends AppCompatActivity {
 
     public static class States{
 
-        public static int HOME=1;
-        public static int ADD_BUCKET=2;
+        public static final int HOME=1;
+        public static final int ADD_BUCKET = 348;
     }
 
 
 
 
-    Fragment fragment,pFragment;
+    Fragment curFragment,pFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +63,8 @@ public class Home extends AppCompatActivity {
 
                     fab.setImageResource(R.drawable.ic_check_white_48dp);
 
-                    fragment=new AddToBox();
 
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                    transaction.replace(R.id.fragment, fragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+                    transactToState(States.ADD_BUCKET);
 
 
                 }
@@ -76,6 +73,8 @@ public class Home extends AppCompatActivity {
                     fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
                     fab.setImageResource(R.drawable.ic_add_white_48dp);
+                    transactToState(States.HOME);
+
 
                 }
 
@@ -91,6 +90,7 @@ public class Home extends AppCompatActivity {
 
 
 
+        transactToState(States.HOME);
 
         initNavigationDrawer();
 
@@ -164,4 +164,75 @@ public class Home extends AppCompatActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }
+
+
+
+    FragmentTransaction transaction;
+    FragmentManager manager;
+    public void transactToState(int state)
+    {
+
+        manager=getSupportFragmentManager();
+        manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        switch (state)
+        {
+            case States.ADD_BUCKET :
+
+
+                pFragment= getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+                curFragment =new AddToBox();
+
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.fr_fade_in, R.anim.fr_fade_out);
+                transaction.replace(R.id.fragment, curFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+                break;
+            case States.HOME :
+
+                pFragment= getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+
+                curFragment =new HomeFragment();
+
+                transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.fr_fade_in, R.anim.fr_fade_out);
+                transaction.replace(R.id.fragment, curFragment);
+                transaction.addToBackStack(null);
+                transaction.remove(pFragment);
+                transaction.commit();
+
+
+
+                break;
+            default:
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
