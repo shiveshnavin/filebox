@@ -102,13 +102,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:padding="2dp"
-                android:layout_weight="0.1"
+                android:layout_weight="0.15"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:src="@drawable/avd_del"
+                    android:src="@drawable/avd_cross"
                     android:id="@+id/del"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

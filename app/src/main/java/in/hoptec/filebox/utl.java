@@ -92,6 +92,18 @@ public class utl {
     }
 
 
+    public static void animate_avd(ImageView img)
+    {
+
+        final Drawable drawable = img.getDrawable();
+
+        if (drawable instanceof Animatable) {
+            ((Animatable) drawable).start();
+        }
+
+
+
+    }
 
     public static void animate(View app, String property, int initv, int finalv, boolean repeat, int dur)
     {

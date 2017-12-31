@@ -2,6 +2,7 @@ package in.hoptec.filebox.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
+import in.hoptec.filebox.utils.GenricCallback;
+import in.hoptec.filebox.utl;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
@@ -37,6 +41,15 @@ public class AddToBox extends Fragment {
     public Context ctx;
     public Activity act;
 
+    ImageView del;
+
+    public void transactToState(int state)
+    {
+
+
+
+
+    }
     View view;
     ArrayList<BoxesAdapter.Dummy> dummies;
     @Override
@@ -46,7 +59,7 @@ public class AddToBox extends Fragment {
 
         ctx=getContext();
         act=getActivity();
-
+        del=(ImageView)view.findViewById(R.id.del);
         recyclerView =(RecyclerView)view.findViewById(R.id.boxes);
         mLayoutManager = new LinearLayoutManager(ctx);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -70,6 +83,33 @@ public class AddToBox extends Fragment {
         dummies.add(new BoxesAdapter.Dummy());
 
 
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                utl.animate_avd(del);
+                utl.snack(act, "Discard changes and exit ?", "EXIT", new GenricCallback() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onDo(Object obj) {
+
+                    }
+
+                    @Override
+                    public void onDo(Object obj, Object obj2) {
+
+                    }
+
+                    @Override
+                    public void onDone(Object obj) {
+
+                    }
+                });
+            }
+        });
         // Initialize a new instance of RecyclerView Adapter instance
         mAdapter = new BoxesAdapter(ctx,dummies){
 

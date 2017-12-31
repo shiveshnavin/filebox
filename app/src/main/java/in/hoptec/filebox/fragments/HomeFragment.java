@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
+import in.hoptec.filebox.utils.Transact;
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
@@ -24,10 +25,13 @@ import jp.wasabeef.recyclerview.animators.LandingAnimator;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements Transact{
 
-    public HomeFragment() {
-    }
+    Transact cb;
+
+
+    public HomeFragment()
+    {}
 
 
     private RecyclerView recyclerView;
@@ -35,7 +39,13 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    public void transactToState(int state)
+    {
 
+
+
+
+    }
 
     public Context ctx;
     public Activity act;
