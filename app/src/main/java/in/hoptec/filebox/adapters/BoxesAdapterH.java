@@ -13,30 +13,27 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Random;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.database.Box;
 import in.hoptec.filebox.database.BoxMeta;
-import in.hoptec.filebox.utl;
 
 
-public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHolder> {
-    private List<Dummy> feedItemList;
+public class BoxesAdapterH extends  RecyclerView.Adapter<BoxesAdapterH.CustomViewHolder> {
+    private List<BoxesAdapter.Dummy> feedItemList;
     private Context mContext;
 
-    public BoxesAdapter(Context context, List<Dummy> feedItemList) {
+    public BoxesAdapterH(Context context, List<BoxesAdapter.Dummy> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_box,viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_boxh,viewGroup, false);
 
         CustomViewHolder viewHolder = new CustomViewHolder(view);
         return viewHolder;
@@ -46,7 +43,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
 
         final int pos=customViewHolder.getAdapterPosition();
-        final Dummy item=feedItemList.get(pos);
+        final BoxesAdapter.Dummy item=feedItemList.get(pos);
         customViewHolder.textView.setText(Html.fromHtml(item.boxData.id));
         customViewHolder.base.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +136,6 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
         }
     }
 
-
     public void click(int pos, BoxesAdapter.Dummy cat)
     {
 
@@ -154,27 +150,6 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
     {
 
 
-    }
-
-    public static class Dummy extends Box
-    {
-        String data="TEST";
-        public Dummy(int i)
-        {
-
-            boxData=new BoxMeta();
-            boxData.id="Box No is "+i;
-
-        }
-
-        public Dummy( )
-        {}
-
-        public String getData(int i)
-        {
-            return "Bucket No "+i;
-        }
-        
     }
 
 

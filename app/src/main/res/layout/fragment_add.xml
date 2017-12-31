@@ -136,10 +136,14 @@
             android:layout_width="match_parent"
             >
 
-            <include
+
+
+
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/colorAccent"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                layout="@layout/include_search_view" />
+                android:layout_height="0.1dp"/>
 
 
 
@@ -161,11 +165,20 @@
                 android:id="@+id/boxes_added"
                 android:background="@color/white"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
+
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                layout="@layout/include_search_view" />
 
 
             <com.daniribalbert.customfontlib.views.CustomFontTextView
@@ -178,12 +191,6 @@
                 android:text="SELECT BOXES TO PUT FILE IN"
                 android:textColor="@color/material_orange_700"
                 android:textSize="14sp" />
-
-            <View
-                android:layout_marginTop="5dp"
-                android:background="@color/grey_400"
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"/>
 
    <android.support.v7.widget.RecyclerView
                 android:id="@+id/boxes"

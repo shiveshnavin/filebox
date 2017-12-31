@@ -2,7 +2,6 @@ package in.hoptec.filebox.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import in.hoptec.filebox.Home;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
+import in.hoptec.filebox.adapters.BoxesAdapterH;
 import in.hoptec.filebox.utils.GenricCallback;
 import in.hoptec.filebox.utils.Transact;
 import in.hoptec.filebox.utl;
@@ -33,10 +33,10 @@ public class AddToBox extends Fragment {
     }
 
 
-    private RecyclerView recyclerView;
+    private RecyclerView boxesRec,boxesAddedRec;
 
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter boxAdapter,boxAddAdapter;
+    private RecyclerView.LayoutManager mLayoutManager,mLayoutManager2;
 
 
 
@@ -53,7 +53,7 @@ public class AddToBox extends Fragment {
     }
 
     View view;
-    ArrayList<BoxesAdapter.Dummy> dummies;
+    ArrayList<BoxesAdapter.Dummy> box_list,box_added;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,27 +62,21 @@ public class AddToBox extends Fragment {
         ctx=getContext();
         act=getActivity();
         del=(ImageView)view.findViewById(R.id.del);
-        recyclerView =(RecyclerView)view.findViewById(R.id.boxes);
+        boxesRec =(RecyclerView)view.findViewById(R.id.boxes);
+        boxesAddedRec =(RecyclerView)view.findViewById(R.id.boxes_added);
         mLayoutManager = new LinearLayoutManager(ctx);
-        recyclerView.setLayoutManager(mLayoutManager);
+        mLayoutManager2 = new LinearLayoutManager(ctx,LinearLayoutManager.HORIZONTAL,false);
 
-        dummies=new ArrayList<>();
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
+        box_list =new ArrayList<>();
+
+        int i=0;
+        do {
+            box_list.add(new BoxesAdapter.Dummy(i));
+        } while (i++<10);
+
+
+        box_added =new ArrayList<>();
+
 
 
         del.setOnClickListener(new View.OnClickListener() {
@@ -115,16 +109,25 @@ public class AddToBox extends Fragment {
             }
         });
         // Initialize a new instance of RecyclerView Adapter instance
-        mAdapter = new BoxesAdapter(ctx,dummies){
+        boxAdapter = new BoxesAdapter(ctx, box_list){
 
             @Override
-            public void click(int pos) {
-                super.click(pos);
+            public void click(final int pos,final  BoxesAdapter.Dummy cat) {
+                super.click(pos,cat);
 
-                if(pos>=dummies.size())
-                    return;
-                dummies.remove(pos);
+
+                utl.l("REMOVING : "+utl.js.toJson(box_list.get(pos)));
+
+                box_added.add(cat);
+                boxAddAdapter.notifyItemInserted(box_added.size()-1);
+                boxesAddedRec.smoothScrollToPosition(box_added.size()-1);
+                boxAdapter.notifyDataSetChanged();
+
+
+                box_list.remove(cat);
+                notifyDataSetChanged();
                 notifyItemRemoved(pos);
+
 
 
             }
@@ -133,16 +136,45 @@ public class AddToBox extends Fragment {
         };
 
 
+        boxAddAdapter = new BoxesAdapterH(ctx, box_added){
+
+            @Override
+            public void click(final int pos,final  BoxesAdapter.Dummy cat) {
+                super.click(pos,cat);
+
+
+                box_list.add(cat);
+                boxAdapter.notifyItemInserted(box_list.size()-1);
+                boxesRec.smoothScrollToPosition(box_list.size()-1);
+                boxAdapter.notifyDataSetChanged();
+
+
+                box_added.remove(cat);
+                notifyDataSetChanged();
+                notifyItemRemoved(pos);
+
+
+
+            }
+
+
+        };
+        boxesAddedRec.setLayoutManager(mLayoutManager2);
+        boxesRec.setLayoutManager(mLayoutManager);
+
 
         LandingAnimator animator = new LandingAnimator(new OvershootInterpolator(1f));
-        recyclerView.setItemAnimator(animator);
-        SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(mAdapter);
+        boxesRec.setItemAnimator(animator);
+        SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(boxAdapter);
         alphaAdapter.setDuration(1000);
+        boxesRec.setNestedScrollingEnabled(false);
+        boxesRec.setAdapter(alphaAdapter);
 
-        recyclerView.setNestedScrollingEnabled(false);
-
-
-        recyclerView.setAdapter(alphaAdapter);
+        boxesAddedRec.setItemAnimator(animator);
+        SlideInBottomAnimationAdapter alphaAdapter2 = new SlideInBottomAnimationAdapter(boxAddAdapter);
+        alphaAdapter2.setDuration(1000);
+        boxesAddedRec.setNestedScrollingEnabled(false);
+        boxesAddedRec.setAdapter(alphaAdapter2);
 
 
         return view;

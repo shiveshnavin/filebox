@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import java.util.ArrayList;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
 import in.hoptec.filebox.utils.Transact;
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
@@ -51,7 +48,7 @@ public class HomeFragment extends Fragment implements Transact{
     public Activity act;
 
     View view;
-    ArrayList<BoxesAdapter.Dummy> dummies;
+    ArrayList<BoxesAdapter.Dummy> box_list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,35 +61,23 @@ public class HomeFragment extends Fragment implements Transact{
         mLayoutManager = new LinearLayoutManager(ctx);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        dummies=new ArrayList<>();
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-        dummies.add(new BoxesAdapter.Dummy());
-
+        box_list =new ArrayList<>();
+        int i=0;
+        do {
+            box_list.add(new BoxesAdapter.Dummy(i));
+        } while (i++<10);
 
         // Initialize a new instance of RecyclerView Adapter instance
-        mAdapter = new BoxesAdapter(ctx,dummies){
+        mAdapter = new BoxesAdapter(ctx, box_list){
+
 
             @Override
-            public void click(int pos) {
-                super.click(pos);
+            public void click(int pos, BoxesAdapter.Dummy cat) {
+                super.click(pos,cat);
 
-                if(pos>=dummies.size())
+                if(pos>= box_list.size())
                     return;
-                dummies.remove(pos);
+                box_list.remove(pos);
                 notifyItemRemoved(pos);
 
 
@@ -102,7 +87,7 @@ public class HomeFragment extends Fragment implements Transact{
             public void clickLong(int pos) {
                 super.clickLong(pos);
 
-              //  dummies.add(new BoxesAdapter.Dummy());
+              //  box_list.add(new BoxesAdapter.Dummy());
 
               //  notifyItemInserted(pos);
                 //notifyDataSetChanged();

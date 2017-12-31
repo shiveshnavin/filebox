@@ -66,7 +66,8 @@ public class Splash extends AppCompatActivity {
         }
 
         final TextView textView = (TextView) findViewById(R.id.title);
-        Spannable word = new SpannableString("File");
+        Spannable word = new SpannableString("File d");
+
 
         word.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.white)), 0, word.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
