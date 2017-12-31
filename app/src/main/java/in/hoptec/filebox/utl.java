@@ -60,6 +60,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 
@@ -1050,6 +1051,11 @@ public class utl {
 
 
 
+    public static int getRandomIntInRange(int max, int min){
+        Random mRandom = new Random();
+
+        return mRandom.nextInt((max-min)+min)+min;
+    }
 
 
     public static GenricUser readUserData()

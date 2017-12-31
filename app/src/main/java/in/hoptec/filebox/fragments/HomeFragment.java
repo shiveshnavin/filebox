@@ -79,9 +79,10 @@ public class HomeFragment extends Fragment {
             public void clickLong(int pos) {
                 super.clickLong(pos);
 
-                dummies.add(new BoxesAdapter.Dummy());
+              //  dummies.add(new BoxesAdapter.Dummy());
 
-                notifyItemInserted(pos);
+              //  notifyItemInserted(pos);
+                //notifyDataSetChanged();
 
 
             }

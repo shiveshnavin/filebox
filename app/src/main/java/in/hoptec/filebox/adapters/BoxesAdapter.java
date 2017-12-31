@@ -4,13 +4,20 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Random;
 
 import in.hoptec.filebox.R;
+import in.hoptec.filebox.database.Box;
+import in.hoptec.filebox.utl;
 
 
 public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHolder> {
@@ -24,7 +31,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_box, null);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_box,viewGroup, false);
 
         CustomViewHolder viewHolder = new CustomViewHolder(view);
         return viewHolder;
@@ -43,6 +50,36 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
             }
         });
 
+        customViewHolder.base.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+
+                        Animation animation= AnimationUtils.loadAnimation(mContext,R.anim.rec_zoom_in);
+                        customViewHolder.base.startAnimation(animation);
+                        break;
+                    case MotionEvent.ACTION_UP:
+
+                        Animation animation2= AnimationUtils.loadAnimation(mContext,R.anim.rec_zoom_nomal);
+                        customViewHolder.base.startAnimation(animation2);
+
+
+
+                        break;
+                    default:
+                        break;
+                }
+
+
+
+                return false;
+            }
+        });
+
+       // customViewHolder.root.getLayoutParams().height = utl.getRandomIntInRange(250,75);
+
 
         customViewHolder.base.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -54,6 +91,8 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
         });
     }
 
+
+
     @Override
     public int getItemCount() {
         return (null != feedItemList ? feedItemList.size() : 0);
@@ -64,6 +103,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
 
         TextView textView;
         View base;
+        RelativeLayout root;
 
 
         public CustomViewHolder(View v) {
@@ -71,6 +111,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
             
             base=v;
             textView=(TextView) base.findViewById(R.id.name);
+            root=(RelativeLayout) base.findViewById(R.id.root);
 
             
             
@@ -95,7 +136,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
 
     }
 
-    public static class Dummy
+    public static class Dummy extends Box
     {
         String data="TEST";
         
