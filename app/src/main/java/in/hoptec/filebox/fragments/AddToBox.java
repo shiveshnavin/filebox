@@ -15,9 +15,11 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import in.hoptec.filebox.Home;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
 import in.hoptec.filebox.utils.GenricCallback;
+import in.hoptec.filebox.utils.Transact;
 import in.hoptec.filebox.utl;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
@@ -43,13 +45,13 @@ public class AddToBox extends Fragment {
 
     ImageView del;
 
-    public void transactToState(int state)
-    {
-
-
-
-
+    Transact activityCommunicator;
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+         activityCommunicator =(Transact)getActivity();
     }
+
     View view;
     ArrayList<BoxesAdapter.Dummy> dummies;
     @Override
@@ -91,6 +93,8 @@ public class AddToBox extends Fragment {
                     @Override
                     public void onStart() {
 
+
+                        activityCommunicator.transactToState(Home.States.HOME);
                     }
 
                     @Override
@@ -142,4 +146,19 @@ public class AddToBox extends Fragment {
 
         return view;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

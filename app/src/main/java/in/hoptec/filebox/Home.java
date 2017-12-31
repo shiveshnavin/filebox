@@ -1,5 +1,7 @@
 package in.hoptec.filebox;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
@@ -22,8 +24,10 @@ import android.widget.Toast;
 
 import in.hoptec.filebox.fragments.AddToBox;
 import in.hoptec.filebox.fragments.HomeFragment;
+import in.hoptec.filebox.utils.GenricCallback;
+import in.hoptec.filebox.utils.Transact;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements Transact{
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
 
@@ -35,8 +39,10 @@ public class Home extends AppCompatActivity {
         public static final int ADD_BUCKET = 348;
     }
 
+    public Context ctx;
+    public Activity act;
 
-
+    FloatingActionButton fab;
 
     Fragment curFragment,pFragment;
 
@@ -47,9 +53,11 @@ public class Home extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ctx=this;
+        act=this;
 
 
-       final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,22 +66,15 @@ public class Home extends AppCompatActivity {
 
                 if(CUR_STATE==States.HOME)
                 {
-                    CUR_STATE=States.ADD_BUCKET;
-                    fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_green_500)));
-
-                    fab.setImageResource(R.drawable.ic_check_white_48dp);
-
 
                     transactToState(States.ADD_BUCKET);
 
 
                 }
                 else {
-                    CUR_STATE=States.HOME;
-                    fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
-                    fab.setImageResource(R.drawable.ic_add_white_48dp);
-                    transactToState(States.HOME);
+                    utl.snack(Home.this,"Added !");
+                   transactToState(States.HOME);
 
 
                 }
@@ -189,6 +190,11 @@ public class Home extends AppCompatActivity {
                 transaction.replace(R.id.fragment, curFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+                CUR_STATE=States.ADD_BUCKET;
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_green_500)));
+
+                fab.setImageResource(R.drawable.ic_check_white_48dp);
+
 
 
                 break;
@@ -206,6 +212,10 @@ public class Home extends AppCompatActivity {
                 transaction.remove(pFragment);
                 transaction.commit();
 
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+                CUR_STATE=States.HOME;
+
+                fab.setImageResource(R.drawable.ic_add_white_48dp);
 
 
                 break;
@@ -218,21 +228,42 @@ public class Home extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+        if(CUR_STATE==States.HOME)
+        {
+            finish();
+        }
+        else if(CUR_STATE==States.ADD_BUCKET)
+        {
+            utl.snack(act, "Discard changes and exit ?", "EXIT", new GenricCallback() {
+                @Override
+                public void onStart() {
 
 
+                    transactToState(States.HOME);
+                }
+
+                @Override
+                public void onDo(Object obj) {
+
+                }
+
+                @Override
+                public void onDo(Object obj, Object obj2) {
+
+                }
+
+                @Override
+                public void onDone(Object obj) {
+
+                }
+            });
+
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }
