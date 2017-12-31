@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import in.hoptec.filebox.fragments.AddToBox;
 
 public class Home extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -31,6 +35,8 @@ public class Home extends AppCompatActivity {
 
 
 
+
+    Fragment fragment,pFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,16 @@ public class Home extends AppCompatActivity {
                     fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_green_500)));
 
                     fab.setImageResource(R.drawable.ic_check_white_48dp);
+
+                    fragment=new AddToBox();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                    transaction.replace(R.id.fragment, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+
                 }
                 else {
                     CUR_STATE=States.HOME;
