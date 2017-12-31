@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 /**
@@ -49,10 +51,21 @@ public class HomeFragment extends Fragment {
         act=getActivity();
 
         recyclerView =(RecyclerView)view.findViewById(R.id.boxes);
-        mLayoutManager = new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+        mLayoutManager = new LinearLayoutManager(ctx);
         recyclerView.setLayoutManager(mLayoutManager);
 
         dummies=new ArrayList<>();
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
+        dummies.add(new BoxesAdapter.Dummy());
         dummies.add(new BoxesAdapter.Dummy());
         dummies.add(new BoxesAdapter.Dummy());
         dummies.add(new BoxesAdapter.Dummy());
@@ -92,7 +105,12 @@ public class HomeFragment extends Fragment {
 
         LandingAnimator animator = new LandingAnimator(new OvershootInterpolator(1f));
         recyclerView.setItemAnimator(animator);
-        recyclerView.setAdapter(new ScaleInAnimationAdapter(mAdapter));
+        SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(mAdapter);
+        alphaAdapter.setDuration(1000);
+
+
+
+        recyclerView.setAdapter(alphaAdapter);
 
 
         return view;
