@@ -25,10 +25,9 @@
 
         <RelativeLayout
             android:id="@+id/title_cont"
-            android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_weight="0.9"
+            android:layout_weight="1.2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             >
@@ -37,11 +36,12 @@
             <ImageView
                 android:gravity="left"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/logo"
+                android:layout_below="@+id/logo"
                 android:id="@+id/title_im"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_anim_app_name" />
+                android:layout_width="100dp"
+                android:alpha="0"
+                android:layout_height="50dp"
+                 android:src="@drawable/ic_anim_app_name" />
 
 
             <com.daniribalbert.customfontlib.views.CustomFontTextView
@@ -59,7 +59,7 @@
                 android:layout_toRightOf="@+id/logo" />
 
             <ImageView
-                android:layout_alignParentLeft="true"
+                 android:layout_alignParentLeft="true"
                 android:id="@+id/logo"
                 android:layout_width="96dp"
                 android:layout_height="96dp"

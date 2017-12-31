@@ -42,8 +42,6 @@ dependencies {
     compile 'com.daniribalbert:custom-font-lib:0.9.8'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
-    compile 'com.github.tarek360.RichPath:animator:0.0.9'
     compile 'me.relex:circleindicator:1.2.2@aar'
 
     //network

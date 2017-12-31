@@ -76,22 +76,39 @@ public class Splash extends AppCompatActivity {
         wordTwo.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.material_green_300)), 0, wordTwo.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.append(wordTwo);
 
-        final Animation myAnim2 = AnimationUtils.loadAnimation(ctx, R.anim.translate_x);
+        final Animation myAnim2 = AnimationUtils.loadAnimation(ctx, R.anim.slid_up);
         myAnim2.setDuration(getResources().getInteger(R.integer.spl_dur)/2);
 
 
-               // textView.startAnimation(myAnim2);
-        ImageView mIcDownloadAnimator2 = (ImageView) findViewById(R.id.title_im);
+        // textView.startAnimation(myAnim2);
+        final ImageView mIcDownloadAnimator2 = (ImageView) findViewById(R.id.title_im);
 
-        mIcDownloadAnimator2.startAnimation(myAnim2);
 
 
 
         bg=findViewById(R.id.backg);
         title_cont=findViewById(R.id.title_cont);
 
-        Animation myAnim = AnimationUtils.loadAnimation(ctx, R.anim.zoom_anim);
+        Animation myAnim = AnimationUtils.loadAnimation(ctx, R.anim.slid_down_from_top);
 
+        myAnim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                //  mIcDownloadAnimator2.startAnimation(myAnim2);
+               mIcDownloadAnimator2.animate().alpha(1f);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         title_cont.startAnimation(myAnim);
 
 
@@ -103,7 +120,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
 
-                if(utl.getKey("firstinstall",ctx)==null)
+                if(utl.getKey("firstinstall",ctx)==null||true)
                 {
 
                     if (drawable instanceof Animatable) {
@@ -129,10 +146,11 @@ public class Splash extends AppCompatActivity {
                     setUpIntro();
 
                 }
-                else {
+                else  {
                     Intent intent=new Intent(ctx, Home.class);
                     startActivity(intent);
                     finish();
+
 
                 }
 
