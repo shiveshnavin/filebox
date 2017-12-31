@@ -139,6 +139,7 @@ public class AddToBox extends Fragment {
         SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(mAdapter);
         alphaAdapter.setDuration(1000);
 
+        recyclerView.setNestedScrollingEnabled(false);
 
 
         recyclerView.setAdapter(alphaAdapter);

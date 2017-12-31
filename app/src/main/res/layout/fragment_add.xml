@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="0.8"
                     android:layout_height="0dp"
-                    app:font="Avenir-Medium"
+                    app:font="avenir-next-regular"
                     android:gravity="left"
                     android:text="TEXT"
                     android:textColor="@color/grey_600"
@@ -124,38 +124,77 @@
             android:layout_width="match_parent"
             android:layout_height="0.1dp"/>
 
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/boxes"
-        android:background="@color/white"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical">
-    </android.support.v7.widget.RecyclerView>
+        >
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            >
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                layout="@layout/include_search_view" />
+
+
+            <com.daniribalbert.customfontlib.views.CustomFontTextView
+                android:layout_width="match_parent"
+                android:layout_weight="0.8"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+
+                app:font="Avenir-Medium"
+                android:gravity="left"
+                android:text="SELECTED BOXES"
+                android:textColor="@color/material_orange_700"
+                android:textSize="14sp" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/boxes_added"
+                android:background="@color/white"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
 
 
+            <com.daniribalbert.customfontlib.views.CustomFontTextView
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="0.8"
+                android:layout_height="0dp"
+                app:font="Avenir-Medium"
+                android:gravity="left"
+                android:text="SELECT BOXES TO PUT FILE IN"
+                android:textColor="@color/material_orange_700"
+                android:textSize="14sp" />
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <View
+                android:layout_marginTop="5dp"
+                android:background="@color/grey_400"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"/>
 
+   <android.support.v7.widget.RecyclerView
+                android:id="@+id/boxes"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
+        </LinearLayout>
 
-
-
-
-
-
-
-
-
-
-
+    </android.support.v4.widget.NestedScrollView>
 
 
 </LinearLayout>
