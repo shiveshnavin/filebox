@@ -146,9 +146,8 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                      android:layout_weight="0.9"
-                    android:textColorHint="@color/grey_200"
+                    android:textColorHint="@color/colorAccent"
 
-                    android:hint="Name a new box "
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     android:layout_height="wrap_content">
@@ -156,10 +155,14 @@
                     <com.daniribalbert.customfontlib.views.CustomFontEditText
                         android:layout_margin="10dp"
                         android:hint="Name a new box "
-
-                        android:id="@+id/title"
-                        android:textColor="@color/grey_900"
-                        app:font="Avenir-Medium"
+                        android:textSize="13sp"
+                        android:singleLine="true"
+                        android:imeActionLabel="ADD"
+                        android:maxLines="1"
+                        android:id="@+id/box_name"
+                        android:imeOptions="actionGo"
+                        android:textColor="@color/grey_800"
+                        app:font="Roboto-Regular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -167,7 +170,7 @@
 
                 <ImageView
                     android:layout_weight="0.1"
-                    android:src="@drawable/avd_cross"
+                    android:src="@drawable/avd_plus_to_chk"
                     android:id="@+id/add"
                     android:layout_width="0dp"
                     android:layout_height="match_parent" />
@@ -225,7 +228,7 @@
                 android:layout_height="0dp"
                 app:font="Avenir-Medium"
                 android:gravity="left"
-                android:text="OR SELECT BOXES TO PUT FILE IN"
+                android:text="OR SELECT BOXES TO PUT FILE(S) IN"
                 android:textColor="@color/material_orange_700"
                 android:textSize="14sp" />
 

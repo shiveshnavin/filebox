@@ -4,6 +4,7 @@
     android:id="@+id/fragment"
     android:name="in.hoptec.filebox.fragments.HomeFragment"
     android:layout_width="match_parent"
+    android:tag="fragment_tag"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:layout="@layout/fragment_home" />
