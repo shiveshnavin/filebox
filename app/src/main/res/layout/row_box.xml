@@ -43,12 +43,12 @@
                 android:layout_width="match_parent"
                 android:layout_weight="0.8"
                 android:layout_height="0dp"
-                app:font="Avenir-Medium"
+                app:font="Roboto-Regular"
                 android:gravity="left"
                 android:text="TEXT"
                 android:textColor="@color/grey_600"
                 android:id="@+id/name"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
 
             <LinearLayout
