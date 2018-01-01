@@ -884,7 +884,7 @@ public class utl {
             File folder=new File(Constants.getFolder());
             if(folder.exists())
             {
-                utl.log("INSTALL : Deleting folder");
+                utl.log("INSTALL :Deleting folder");
                 utl.deleteDir(folder);
             }
             editor = ctx.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
