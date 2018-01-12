@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
@@ -21,15 +18,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import in.hoptec.filebox.Home;
+import in.hoptec.filebox.ui.Home;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
 import in.hoptec.filebox.adapters.BoxesAdapterH;
-import in.hoptec.filebox.database.Box;
 import in.hoptec.filebox.database.BoxMeta;
 import in.hoptec.filebox.utils.GenricCallback;
 import in.hoptec.filebox.utils.Transact;
-import in.hoptec.filebox.utl;
+import in.hoptec.filebox.utils.utl;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 

@@ -1,9 +1,12 @@
-package in.hoptec.filebox;
+package in.hoptec.filebox.database;
 
 import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
+
+import in.hoptec.filebox.R;
+import in.hoptec.filebox.utils.utl;
 
 /**
  * Created by shivesh on 28/6/17.

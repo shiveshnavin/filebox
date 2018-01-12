@@ -1,4 +1,4 @@
-package in.hoptec.filebox;
+package in.hoptec.filebox.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentContainer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -22,10 +21,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import in.hoptec.filebox.R;
 import in.hoptec.filebox.fragments.AddToBox;
 import in.hoptec.filebox.fragments.HomeFragment;
 import in.hoptec.filebox.utils.GenricCallback;
 import in.hoptec.filebox.utils.Transact;
+import in.hoptec.filebox.utils.utl;
 
 public class Home extends AppCompatActivity implements Transact{
     private DrawerLayout drawerLayout;

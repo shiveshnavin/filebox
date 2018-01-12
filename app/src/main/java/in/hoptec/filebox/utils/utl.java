@@ -1,4 +1,4 @@
-package in.hoptec.filebox;
+package in.hoptec.filebox.utils;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
@@ -23,7 +23,6 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -64,7 +63,10 @@ import java.util.Random;
 import java.util.UUID;
 
 
-import in.hoptec.filebox.utils.GenricCallback;
+import in.hoptec.filebox.BuildConfig;
+import in.hoptec.filebox.database.Constants;
+import in.hoptec.filebox.R;
+import in.hoptec.filebox.database.GenricUser;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -1025,7 +1027,7 @@ public class utl {
         return  true;
     }
 
-    public static  boolean writeUserData(GenricUser guser,Context ctx)
+    public static  boolean writeUserData(GenricUser guser, Context ctx)
     {
         String data= Constants.userDataFile();
         FileOperations fop=new FileOperations();

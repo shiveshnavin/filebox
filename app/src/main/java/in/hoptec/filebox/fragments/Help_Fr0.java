@@ -1,9 +1,7 @@
 package in.hoptec.filebox.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,14 +13,13 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import in.hoptec.filebox.Home;
+import in.hoptec.filebox.ui.Home;
 import in.hoptec.filebox.R;
-import in.hoptec.filebox.Splash;
-import in.hoptec.filebox.utl;
+import in.hoptec.filebox.ui.Splash;
+import in.hoptec.filebox.utils.utl;
 
 /**
  * Created by shivesh on 29/12/17.

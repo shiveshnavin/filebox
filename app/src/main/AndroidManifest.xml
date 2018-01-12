@@ -18,13 +18,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Splash"
+            android:name=".ui.Splash"
             android:theme="@style/AppTheme">
 
 
         </activity>
         <activity
-            android:name=".Home"
+            android:name=".ui.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme">
 

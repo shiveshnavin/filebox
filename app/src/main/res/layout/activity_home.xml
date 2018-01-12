@@ -16,7 +16,7 @@
     android:layout_height="match_parent"
     android:elevation="0dp"
     android:fitsSystemWindows="true"
-    tools:context="in.hoptec.filebox.Home">
+    tools:context="in.hoptec.filebox.ui.Home">
 
 
     <android.support.design.widget.AppBarLayout

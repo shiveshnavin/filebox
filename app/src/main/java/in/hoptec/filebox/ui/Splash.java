@@ -1,6 +1,5 @@
-package in.hoptec.filebox;
+package in.hoptec.filebox.ui;
 
-import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -38,8 +37,10 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.HelpPagerAdapter;
 import in.hoptec.filebox.fragments.Help_Fr0;
+import in.hoptec.filebox.utils.utl;
 import me.relex.circleindicator.CircleIndicator;
 
 public class Splash extends AppCompatActivity {

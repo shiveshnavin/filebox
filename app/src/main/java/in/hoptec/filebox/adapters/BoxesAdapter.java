@@ -13,16 +13,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.Random;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.database.Box;
 import in.hoptec.filebox.database.BoxMeta;
-import in.hoptec.filebox.utl;
 
 
 public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHolder> {
