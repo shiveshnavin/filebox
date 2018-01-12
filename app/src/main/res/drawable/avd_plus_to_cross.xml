@@ -55,8 +55,10 @@
         <aapt:attr name="android:animation">
             <set>
                 <objectAnimator
+                    android:repeatCount="1"
+                    android:repeatMode="reverse"
                     android:propertyName="rotation"
-                    android:duration="800"
+                    android:duration="300"
                     android:valueFrom="0"
                     android:valueTo="315"
                     android:valueType="floatType"

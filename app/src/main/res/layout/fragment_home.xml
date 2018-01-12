@@ -82,7 +82,6 @@
             android:layout_height="50dp"
             layout="@layout/include_search_view" />
 
-
         <com.daniribalbert.customfontlib.views.CustomFontTextView
             app:font="Avenir-Medium"
             android:id="@+id/logs"

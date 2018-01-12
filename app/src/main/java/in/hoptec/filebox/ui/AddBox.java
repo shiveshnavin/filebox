@@ -18,7 +18,7 @@ import in.hoptec.filebox.utils.GenricCallback;
 import in.hoptec.filebox.utils.Transact;
 import in.hoptec.filebox.utils.utl;
 
-public class Home_ extends BaseActivity implements Transact{
+public class AddBox extends BaseActivity implements Transact{
 
     public int CUR_STATE=States.HOME;
 
@@ -62,7 +62,7 @@ public class Home_ extends BaseActivity implements Transact{
                 }
                 else {
 
-                    utl.snack(Home_.this,"Added !");
+                    utl.snack(AddBox.this,"Added !");
                    transactToState(States.HOME);
 
 
@@ -80,9 +80,9 @@ public class Home_ extends BaseActivity implements Transact{
 
 
 
-        transactToState(States.HOME);
+       // transactToState(States.HOME);
 
-        initNavigationDrawer();
+        initBase();
 
 
     }

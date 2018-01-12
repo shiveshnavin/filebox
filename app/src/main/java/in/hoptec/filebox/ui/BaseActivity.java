@@ -76,7 +76,7 @@ public class BaseActivity  extends AppCompatActivity {
 
                 switch (id){
                     case R.id.home:
-                        Toast.makeText(getApplicationContext(),"Home_",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"AddBox",Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.box:

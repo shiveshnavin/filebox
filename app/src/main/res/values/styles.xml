@@ -16,7 +16,10 @@
 
 
     </style>
-
+    <style name="popup" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:itemBackground">@color/white</item>
+    </style>
 
     <style name="drawer" parent="Theme.AppCompat.NoActionBar">
 

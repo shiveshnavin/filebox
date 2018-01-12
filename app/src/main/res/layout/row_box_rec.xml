@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:orientation="vertical"
+    android:padding="5dp"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
@@ -9,66 +10,56 @@
 
 
     <LinearLayout
-        android:minWidth="80dp"
-        android:layout_margin="3dp"
-        android:layout_gravity="center"
-        android:gravity="center"
+
+        android:padding="7dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:weightSum="1.1"
-        android:orientation="vertical"
-        android:layout_width="60dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
 
         <ImageView
-            android:layout_gravity="center"
-            android:layout_weight="0.65"
+            android:visibility="gone"
             android:id="@+id/icon"
+            android:layout_marginLeft="3dp"
             android:background="@drawable/round_filled"
             android:src="@drawable/ic_launcher"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="38dp"
+            android:layout_height="38dp" />
 
 
         <LinearLayout
-            android:layout_weight="0.45"
-
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:minWidth="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" >
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-
-            <com.daniribalbert.customfontlib.views.CustomFontTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:font="Roboto-Regular"
-                android:text="TEXT"
-                android:gravity="center"
-                android:textColor="@color/grey_600"
-                android:id="@+id/name"
-                android:textSize="12sp" />
 
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:weightSum="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
 
 
                 <com.daniribalbert.customfontlib.views.CustomFontTextView
+                    android:layout_width="wrap_content"
                     android:layout_weight="0.3"
-                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:font="Roboto-Thin"
+                    app:font="Roboto-Regular"
                     android:gravity="left"
-                    android:text="2 Files"
-                    android:textColor="@color/secondary_text"
-                    android:id="@+id/btm_t0"
-                    android:textSize="12sp" />
+                    android:text="TEXT"
+                    android:textColor="@color/grey_600"
+                    android:id="@+id/name"
+                    android:textSize="14sp" />
 
 
                 <com.daniribalbert.customfontlib.views.CustomFontTextView
@@ -102,10 +93,9 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:padding="2dp"
             android:layout_weight="0.1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent">
 
             <ImageView
@@ -117,10 +107,23 @@
 
 
         </LinearLayout>
-
     </LinearLayout>
 
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/files"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+
+
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/grey_400"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"/>
 
 </LinearLayout>

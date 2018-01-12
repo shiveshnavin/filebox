@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.Home_"
+            android:name=".ui.AddBox"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme"></activity>
         <activity android:name=".ui.Home" />

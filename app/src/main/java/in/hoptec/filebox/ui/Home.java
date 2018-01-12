@@ -1,21 +1,30 @@
 package in.hoptec.filebox.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import in.hoptec.filebox.R;
+import in.hoptec.filebox.adapters.BoxesAdapter;
+import in.hoptec.filebox.adapters.BoxesAdapterH;
+import in.hoptec.filebox.adapters.BoxesAdapterRec;
 import in.hoptec.filebox.utils.utl;
+import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 public class Home extends BaseActivity {
 
@@ -26,6 +35,7 @@ public class Home extends BaseActivity {
     private LinearLayout disconnectButton;
     private LinearLayout connectButton;
     private LinearLayout refreshButton;
+    private RecyclerView boxe_r;
 
 
     private AppBarLayout appBarLayout;
@@ -59,7 +69,8 @@ public class Home extends BaseActivity {
         connectButton=(LinearLayout)findViewById(R.id.connect);
         refreshButton=(LinearLayout)findViewById(R.id.refresh);
         sort=(ImageView) findViewById(R.id.sort);
-        appBarHeight=utl.pxFromDp(ctx,200).intValue();
+        boxe_r = (RecyclerView) findViewById(R.id.rec);
+       // appBarHeight=utl.pxFromDp(ctx,170).intValue();
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -84,6 +95,15 @@ public class Home extends BaseActivity {
 
         initOnCLickListeners();
 
+        ArrayList<BoxesAdapterRec.Dummy> box_list =new ArrayList<>();
+
+        int iu=0;
+        do {
+            box_list.add(new BoxesAdapterRec.Dummy(iu));
+        } while (iu++<10);
+
+        setUpBoxes(box_list);
+
 
     }
 
@@ -94,10 +114,11 @@ public class Home extends BaseActivity {
             @Override
             public void onClick(View view) {
                 connect();
+                utl.animate_avd((ImageView) connectButton.findViewById(R.id.iop0));
+
             }
         });
         addPressReleaseAnimation(connectButton);
-
 
 
         disconnectButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +172,9 @@ public class Home extends BaseActivity {
             public void onClick(View view) {
 
                 //creating a popup menu
-                PopupMenu popup = new PopupMenu(ctx,sort);
+                Context wrapper = new ContextThemeWrapper(ctx, R.style.popup);
+
+                PopupMenu popup = new PopupMenu(wrapper,sort);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.menu_sort);
                 //adding click listener
@@ -203,6 +226,7 @@ public class Home extends BaseActivity {
     private void connect()
     {
 
+
     }
 
     private void refresh()
@@ -215,6 +239,41 @@ public class Home extends BaseActivity {
 
     }
 
+
+    private void setUpBoxes(ArrayList<BoxesAdapterRec.Dummy> box_list)
+    {
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false);
+        boxe_r.setLayoutManager(mLayoutManager);
+
+
+
+        BoxesAdapterRec boxAdapter = new BoxesAdapterRec(ctx, box_list){
+
+            @Override
+            public void click(final int pos,final  BoxesAdapterRec.Dummy cat) {
+                super.click(pos,cat);
+
+
+
+
+
+
+            }
+
+
+        };
+
+        LandingAnimator animator = new LandingAnimator(new OvershootInterpolator(1f));
+        boxe_r.setItemAnimator(animator);
+        SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(boxAdapter);
+        alphaAdapter.setDuration(1000);
+        boxe_r.setNestedScrollingEnabled(false);
+        boxe_r.setAdapter(alphaAdapter);
+
+
+
+
+    }
 
 
 }
