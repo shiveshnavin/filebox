@@ -46,7 +46,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class Splash extends AppCompatActivity {
     View pager_container,title_cont;
 
-       View bg;
+    View bg;
     public Context ctx;
     public Activity act;
     float init_pos;
@@ -131,6 +131,7 @@ public class Splash extends AppCompatActivity {
                     }
 
                     pager_container.setVisibility(View.VISIBLE);
+
 
 
                     Animation animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.slid_up);

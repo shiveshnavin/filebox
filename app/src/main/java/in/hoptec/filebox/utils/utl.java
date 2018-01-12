@@ -94,6 +94,9 @@ public class utl {
     }
 
 
+
+
+
     public static void animate_avd(ImageView img)
     {
 

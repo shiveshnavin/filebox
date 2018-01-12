@@ -6,45 +6,256 @@
     android:id="@+id/drawer"
     android:background="@color/grey_200"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-<android.support.design.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:elevation="0dp"
-    android:fitsSystemWindows="true"
-    tools:context="in.hoptec.filebox.ui.Home">
-
-
-    <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/cont"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="in.hoptec.wekare.Main">
 
-        <android.support.v7.widget.Toolbar
-            android:elevation="0dp"
-            android:id="@+id/toolbar"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:layout_height="?attr/actionBarSize" />
-    </android.support.design.widget.AppBarLayout>
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
 
-    <include layout="@layout/content_home" />
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_white_48dp" />
+                <com.alexvasilkov.gestures.views.GestureFrameLayout
+                    android:paddingLeft="?attr/actionBarSize"
+                    android:paddingRight="?attr/actionBarSize"
+                    android:paddingTop="?attr/actionBarSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/backg"
+                    app:gest_maxZoom="1.5"
+                    app:gest_overscrollX="32dp"
+                    android:fitsSystemWindows="false"
+                    app:gest_overscrollY="32dp"
+                    app:gest_restrictRotation="true"
+                    app:gest_rotationEnabled="true" >
+                <LinearLayout
+                    android:id="@+id/header"
+                    android:weightSum="0.9"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-</android.support.design.widget.CoordinatorLayout>
+
+                    <LinearLayout
+                        android:id="@+id/connect"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_black_sqr"
+                            android:id="@+id/iop0"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/avd_plus_to_cross"
+                            android:layout_gravity="center"
+                            android:layout_height="60dp" />
+
+
+
+                        <com.daniribalbert.customfontlib.views.CustomFontTextView
+                            app:font="Avenir-Medium"
+                            android:id="@+id/op0"
+                            android:textColor="@color/icons"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Create Box"
+                            android:textSize="13sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/refresh"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_black_sqr"
+                            android:id="@+id/iop1"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vd_share_many"
+                            android:layout_gravity="center"
+                            android:layout_height="60dp" />
+
+
+
+                        <com.daniribalbert.customfontlib.views.CustomFontTextView
+                            app:font="Avenir-Medium"
+                            android:id="@+id/op1"
+                            android:textColor="@color/icons"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Share or Recieve"
+                            android:textSize="13sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/disconnect"
+                        android:layout_weight="0.3"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_margin="10dp"
+                            android:background="@drawable/rounded_black_sqr"
+                            android:id="@+id/iop2"
+                            android:layout_width="match_parent"
+                            android:src="@drawable/vd_cloud"
+                            android:layout_gravity="center"
+                            android:layout_height="60dp" />
+
+
+
+                        <com.daniribalbert.customfontlib.views.CustomFontTextView
+                            app:font="Avenir-Medium"
+                            android:id="@+id/op2"
+                            android:textColor="@color/icons"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="My Cloud"
+                            android:textSize="13sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+                </com.alexvasilkov.gestures.views.GestureFrameLayout>
+                <android.support.v7.widget.Toolbar
+                    android:background="@color/transparent"
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+                    <LinearLayout
+
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:padding="4dp"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:src="@drawable/ic_app_name"
+                            android:id="@+id/wifiAction"
+                            android:layout_width="100dp"
+
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="50dp"
+                            android:layout_height="match_parent" />
+
+
+                        <ImageView
+                            android:visibility="invisible"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_gravity="right"
+                            android:padding="15dp"
+                            android:src="@drawable/ic_settings_white_48dp"
+                            android:layout_width="60dp"
+                            android:layout_height="match_parent" />
+
+
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.Toolbar>
+
+
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <include
+            layout="@layout/fragment_home"
+            android:id="@+id/include" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:alpha="0"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/avd_plus_to_cross"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="bottom|right"
+            android:layout_gravity="bottom|end" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:alpha="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/vd_share_many"
+            app:layout_anchor="@+id/fab"
+            app:layout_anchorGravity="left|start"
+            android:layout_gravity="bottom|start" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
     <android.support.design.widget.NavigationView
+        android:visibility="gone"
         android:background="@color/colorPrimaryDark"
         app:itemIconTint="@color/nav_item"
         app:itemTextColor="@color/nav_item"
@@ -54,6 +265,5 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_home"/>
-
 
 </android.support.v4.widget.DrawerLayout>

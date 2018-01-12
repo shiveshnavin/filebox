@@ -1,90 +1,144 @@
 package in.hoptec.filebox.ui;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Animatable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import in.hoptec.filebox.R;
-import in.hoptec.filebox.fragments.AddToBox;
-import in.hoptec.filebox.fragments.HomeFragment;
-import in.hoptec.filebox.utils.GenricCallback;
-import in.hoptec.filebox.utils.Transact;
 import in.hoptec.filebox.utils.utl;
 
-public class Home extends AppCompatActivity implements Transact{
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+public class Home extends BaseActivity {
 
-    public int CUR_STATE=States.HOME;
+    /******UI VARS******/
+    private TextView logTextView;
+    private CoordinatorLayout coordinatorLayout;
+    private ImageView wifiActionIndicator;
+    private LinearLayout disconnectButton;
+    private LinearLayout connectButton;
+    private LinearLayout refreshButton;
 
-    public static class States{
 
-        public static final int HOME=1;
-        public static final int ADD_BUCKET = 348;
-    }
+    private AppBarLayout appBarLayout;
+    private LinearLayout header;
 
-    public Context ctx;
-    public Activity act;
+    private FloatingActionButton fabConnect, fabDisconnect;
+    private ImageView sort;
 
-    FloatingActionButton fab;
 
-    Fragment curFragment,pFragment;
+    private int appBarHeight=200;
+
+    private long FAB_ANIM_DUR=400;
+    private boolean LOG_UP=false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initBase();
 
-        ctx=this;
-        act=this;
+        appBarLayout=(AppBarLayout)findViewById(R.id.app_bar);
+        header=(LinearLayout)findViewById(R.id.header);
+        fabConnect = (FloatingActionButton) findViewById(R.id.fab);
+        fabDisconnect = (FloatingActionButton) findViewById(R.id.fab2);
+        logTextView=(TextView)findViewById(R.id.logs);
+        coordinatorLayout=(CoordinatorLayout)findViewById(R.id.cont);
+        wifiActionIndicator=(ImageView)findViewById(R.id.wifiAction);
+        disconnectButton=(LinearLayout)findViewById(R.id.disconnect);
+        connectButton=(LinearLayout)findViewById(R.id.connect);
+        refreshButton=(LinearLayout)findViewById(R.id.refresh);
+        sort=(ImageView) findViewById(R.id.sort);
+        appBarHeight=utl.pxFromDp(ctx,200).intValue();
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+                Integer verticalOffsetNormalized=-1*verticalOffset;
+
+                Float alphaHeader=1.0f-verticalOffsetNormalized.floatValue()/ appBarHeight;
+                Float alphaFAB=verticalOffsetNormalized.floatValue()/ appBarHeight;
+
+                fabConnect.animate().setDuration(FAB_ANIM_DUR).alpha(alphaFAB);
+                fabDisconnect.animate().setDuration(FAB_ANIM_DUR).alpha(alphaFAB);
+
+                header.setAlpha(alphaHeader);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
+            }
+        });
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabConnect.animate().alpha(0f);
+        fabDisconnect.animate().alpha(0f);
+
+        initOnCLickListeners();
+
+
+    }
+
+    private void initOnCLickListeners()
+    {
+
+        connectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connect();
+            }
+        });
+        addPressReleaseAnimation(connectButton);
+
+
+
+        disconnectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                disconnect();
+            }
+        });
+        addPressReleaseAnimation(disconnectButton);
+
+
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refresh();
+            }
+        });
+        addPressReleaseAnimation(refreshButton);
+
+
+        addPressReleaseAnimation(fabConnect);
+        addPressReleaseAnimation(fabDisconnect);
+
+
+        fabConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(CUR_STATE==States.HOME)
-                {
 
-                    transactToState(States.ADD_BUCKET);
+                connect();
 
-
-                }
-                else {
-
-                    utl.snack(Home.this,"Added !");
-                   transactToState(States.HOME);
+            }
+        });
 
 
-                }
+        fabDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
-
-
-
-
+                refresh();
 
 
             }
@@ -92,179 +146,75 @@ public class Home extends AppCompatActivity implements Transact{
 
 
 
-        transactToState(States.HOME);
-
-        initNavigationDrawer();
-
-
-    }
-
-    public void initNavigationDrawer() {
-
-       final NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
-
-        navigationView.postDelayed(new Runnable() {
+        sort.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
+            public void onClick(View view) {
 
-                ImageView mIcDownloadAnimator = (ImageView) findViewById(R.id.logo);
-                final Drawable drawable = mIcDownloadAnimator.getDrawable();
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(ctx,sort);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.menu_sort);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.by_date:
+                                //handle menu1 click
+                                break;
+                            case R.id.by_name:
+                                //handle menu2 click
+                                break;
+                            case R.id.by_use:
+                                //handle menu3 click
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
 
-                if (drawable instanceof Animatable && utl.ANIM_LV1_ENABLED) {
-                    ((Animatable) drawable).start();
-                }
+
+                utl.animate_avd(sort);
 
             }
-        },400);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                int id = menuItem.getItemId();
 
-                switch (id){
-                    case R.id.home:
-                        Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.box:
-                        Toast.makeText(getApplicationContext(),"Boxes",Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.settings:
-                        Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.cloud:
-                        Toast.makeText(getApplicationContext(),"Trash",Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.about:
-                        finish();
-
-                }
-                return true;
-            }
         });
-        View header = navigationView.getHeaderView(0);
-        TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
-        tv_email.setText("v1.1");
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
-
-            @Override
-            public void onDrawerClosed(View v){
-                super.onDrawerClosed(v);
-            }
-
-            @Override
-            public void onDrawerOpened(View v) {
-                super.onDrawerOpened(v);
-            }
-        };
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
     }
 
 
-
-    FragmentTransaction transaction;
-    FragmentManager manager;
-    public void transactToState(int state)
+    private void expandToolbar()
     {
 
-        manager=getSupportFragmentManager();
-        manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-        switch (state)
-        {
-            case States.ADD_BUCKET :
-
-
-                pFragment= getSupportFragmentManager().findFragmentById(R.id.fragment);
-
-                curFragment =new AddToBox();
-
-                transaction = getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.fr_fade_in, R.anim.fr_fade_out);
-                transaction.replace(R.id.fragment, curFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-                CUR_STATE=States.ADD_BUCKET;
-                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_green_500)));
-
-                fab.setImageResource(R.drawable.ic_check_white_48dp);
-
-
-
-                break;
-            case States.HOME :
-
-                pFragment= getSupportFragmentManager().findFragmentById(R.id.fragment);
-
-
-                curFragment =new HomeFragment();
-
-                transaction = getSupportFragmentManager().beginTransaction();
-                transaction.setCustomAnimations(R.anim.fr_fade_in, R.anim.fr_fade_out);
-                transaction.replace(R.id.fragment, curFragment);
-                transaction.addToBackStack(null);
-                transaction.remove(pFragment);
-                transaction.commit();
-
-                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
-                CUR_STATE=States.HOME;
-
-                fab.setImageResource(R.drawable.ic_add_white_48dp);
-
-
-                break;
-            default:
-
-        }
+        fabConnect.animate().setDuration(FAB_ANIM_DUR).alpha(0f);
+        fabDisconnect.animate().setDuration(FAB_ANIM_DUR).alpha(0f);
 
 
 
     }
 
 
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
 
-        if(CUR_STATE==States.HOME)
-        {
-            finish();
-        }
-        else if(CUR_STATE==States.ADD_BUCKET)
-        {
-            utl.snack(act, "Discard changes and exit ?", "EXIT", new GenricCallback() {
-                @Override
-                public void onStart() {
-
-
-                    transactToState(States.HOME);
-                }
-
-                @Override
-                public void onDo(Object obj) {
-
-                }
-
-                @Override
-                public void onDo(Object obj, Object obj2) {
-
-                }
-
-                @Override
-                public void onDone(Object obj) {
-
-                }
-            });
-
-        }
-
+    private void connect()
+    {
 
     }
+
+    private void refresh()
+    {
+
+    }
+
+    private void disconnect()
+    {
+
+    }
+
+
+
 }

@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import in.hoptec.filebox.ui.Home;
+import in.hoptec.filebox.ui.Home_;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
 import in.hoptec.filebox.adapters.BoxesAdapterH;
@@ -161,7 +161,7 @@ public class AddToBox extends Fragment {
                     public void onStart() {
 
 
-                        activityCommunicator.transactToState(Home.States.HOME);
+                        activityCommunicator.transactToState(Home_.States.HOME);
                     }
 
                     @Override
