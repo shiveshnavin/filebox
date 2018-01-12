@@ -22,16 +22,17 @@ import java.util.List;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.database.Box;
+import in.hoptec.filebox.database.BoxFile;
 import in.hoptec.filebox.database.BoxMeta;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 
 public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.CustomViewHolder> {
-    private List<Dummy> feedItemList;
+    private List<Box> feedItemList;
     private Context mContext;
 
-    public BoxesAdapterRec(Context context, List<Dummy> feedItemList) {
+    public BoxesAdapterRec(Context context, List<Box> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
@@ -48,8 +49,11 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
 
         final int pos=customViewHolder.getAdapterPosition();
-        final Dummy item=feedItemList.get(pos);
-        customViewHolder.textView.setText(Html.fromHtml(item.boxData.id));
+        final Box item=feedItemList.get(pos);
+        customViewHolder.textView.setText(Html.fromHtml(item.boxData.name));
+        customViewHolder.views.setText(Html.fromHtml(""+item.boxData.countUse+" Views"));
+        customViewHolder.date.setText(Html.fromHtml(item.boxData.dateTime));
+
         customViewHolder.base.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,22 +115,16 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
         });
 
 
-        ArrayList<BoxFilesAdapterH.Dummy> box_list =new ArrayList<>();
-
-        int iu=0;
-        do {
-            box_list.add(new BoxFilesAdapterH.Dummy(iu));
-        } while (iu++<10);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
         customViewHolder.files.setLayoutManager(mLayoutManager);
 
 
 
-        BoxFilesAdapterH boxAdapter = new BoxFilesAdapterH(mContext, box_list){
+        BoxFilesAdapterH boxAdapter = new BoxFilesAdapterH(mContext, feedItemList.get(pos).files){
 
             @Override
-            public void click(final int pos,final  BoxFilesAdapterH.Dummy cat) {
+            public void click(final int pos,final BoxFile cat) {
                 super.click(pos,cat);
 
 
@@ -158,7 +156,7 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
     public class CustomViewHolder extends RecyclerView.ViewHolder
     {
 
-        TextView textView;
+        TextView textView,views,date;
         ImageView del,icon;
         View base;
         LinearLayout root;
@@ -170,6 +168,8 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
 
             base=v;
             textView=(TextView) base.findViewById(R.id.name);
+            views=(TextView) base.findViewById(R.id.btm_t1);
+            date=(TextView) base.findViewById(R.id.btm_t2);
             root=(LinearLayout) base.findViewById(R.id.root);
             del=(ImageView) base.findViewById(R.id.del);
             icon=(ImageView) base.findViewById(R.id.icon);
@@ -181,7 +181,7 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
     }
 
 
-    public void click(int pos, BoxesAdapterRec.Dummy cat)
+    public void click(int pos, Box cat)
     {
 
 

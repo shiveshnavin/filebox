@@ -16,12 +16,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.File;
 import java.util.ArrayList;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapter;
 import in.hoptec.filebox.adapters.BoxesAdapterH;
 import in.hoptec.filebox.adapters.BoxesAdapterRec;
+import in.hoptec.filebox.database.Box;
+import in.hoptec.filebox.database.BoxFile;
+import in.hoptec.filebox.database.BoxMeta;
+import in.hoptec.filebox.database.Constants;
+import in.hoptec.filebox.utils.FileOperations;
 import in.hoptec.filebox.utils.utl;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
@@ -95,12 +104,209 @@ public class Home extends BaseActivity {
 
         initOnCLickListeners();
 
-        ArrayList<BoxesAdapterRec.Dummy> box_list =new ArrayList<>();
 
-        int iu=0;
-        do {
-            box_list.add(new BoxesAdapterRec.Dummy(iu));
-        } while (iu++<10);
+
+        readDB();
+    }
+    ArrayList<Box> box_list =new ArrayList<>();
+
+    public void readDB()
+    {
+
+        File db=new File(Constants.getDBFile());
+        if(db.exists()){
+            FileOperations f=new FileOperations();
+            try {
+
+                box_list=new ArrayList<>();
+                utl.e("Reading DB from Device ");
+                JSONArray jar=new JSONArray(f.read(Constants.getDBFile()));
+                for(int i=0;i<jar.length();i++){
+
+                    Box bx=utl.js.fromJson(jar.get(i).toString(),Box.class);
+                    box_list.add(bx);
+                    utl.e("Adding "+bx.boxData.name);
+
+
+
+                }
+
+
+                setUpBoxes(box_list);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            generate();
+        }
+
+
+
+    }
+    public void generate()
+    {
+        utl.e("Creating DB on Device ");
+
+        box_list =new ArrayList<>();
+
+        Box bx=new Box();
+        bx.boxData=new BoxMeta();
+        bx.files=new ArrayList<>();
+        bx.boxData.name="Sem5 assigns";
+        bx.boxData.countUse=16;
+        bx.boxData.dateTime="12 Jan 18";
+
+        BoxFile file=new BoxFile();
+        file.name="DCS 1.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="DCS 3.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="MPMC 1.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="CS 1-6.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="CTS 4.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+        box_list.add(bx);
+
+
+
+        file=new BoxFile();
+        file.name="CTS 1.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+        box_list.add(bx);
+
+
+
+        file=new BoxFile();
+        file.name="control 3.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+        box_list.add(bx);
+
+        /************/
+        bx=new Box();
+        bx.boxData=new BoxMeta();
+        bx.files=new ArrayList<>();
+        bx.boxData.name="Bhavya sem5";
+        bx.boxData.countUse=45;
+        bx.boxData.dateTime="13 Jan 18";
+
+        file=new BoxFile();
+        file.name="mpc 2015 end.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="DCS all trms.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+        file=new BoxFile();
+        file.name="DOC_2017129.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+        file=new BoxFile();
+        file.name="cts 15,16.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+
+        /************/
+        bx=new Box();
+        bx.boxData=new BoxMeta();
+        bx.files=new ArrayList<>();
+        bx.boxData.name="Practical files";
+        bx.boxData.countUse=21;
+        bx.boxData.dateTime="13 Jan 18";
+
+        file=new BoxFile();
+        file.name="mpc.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="dcs.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+        file=new BoxFile();
+        file.name="DOC_2017129.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+        file=new BoxFile();
+        file.name="DS.zip";
+        file.pathThumb="ZIP";
+        bx.files.add(file);
+
+
+
+        /************/
+        /************/
+        bx=new Box();
+        bx.boxData=new BoxMeta();
+        bx.files=new ArrayList<>();
+        bx.boxData.name="Bhavya pdfs";
+        bx.boxData.countUse=12;
+        bx.boxData.dateTime="13 Jan 18";
+
+        file=new BoxFile();
+        file.name="DCS End terms.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="DCS 3.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="MPMC 1.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="Mpc aaa.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+
+
+        file=new BoxFile();
+        file.name="bhavya dcs.pdf";
+        file.pathThumb="-";
+        bx.files.add(file);
+        box_list.add(bx);
+        /************/
+
+        FileOperations fop=new FileOperations();
+        fop.write(Constants.getDBFile(),utl.js.toJson(box_list));
 
         setUpBoxes(box_list);
 
@@ -240,7 +446,7 @@ public class Home extends BaseActivity {
     }
 
 
-    private void setUpBoxes(ArrayList<BoxesAdapterRec.Dummy> box_list)
+    private void setUpBoxes(ArrayList<Box> box_list)
     {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false);
         boxe_r.setLayoutManager(mLayoutManager);
@@ -250,7 +456,7 @@ public class Home extends BaseActivity {
         BoxesAdapterRec boxAdapter = new BoxesAdapterRec(ctx, box_list){
 
             @Override
-            public void click(final int pos,final  BoxesAdapterRec.Dummy cat) {
+            public void click(final int pos,final Box cat) {
                 super.click(pos,cat);
 
 

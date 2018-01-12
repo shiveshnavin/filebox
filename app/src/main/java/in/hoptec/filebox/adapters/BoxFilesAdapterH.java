@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import in.hoptec.filebox.R;
@@ -22,10 +24,10 @@ import in.hoptec.filebox.database.BoxFile;
 
 
 public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.CustomViewHolder> {
-    private List<BoxFilesAdapterH.Dummy> feedItemList;
+    private List<BoxFile> feedItemList;
     private Context mContext;
 
-    public BoxFilesAdapterH(Context context, List<BoxFilesAdapterH.Dummy> feedItemList) {
+    public BoxFilesAdapterH(Context context, List<BoxFile> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
@@ -42,8 +44,8 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
 
         final int pos=customViewHolder.getAdapterPosition();
-        final BoxFilesAdapterH.Dummy item=feedItemList.get(pos);
-        customViewHolder.textView.setText(Html.fromHtml(item.getData(i)));
+        final BoxFile item=feedItemList.get(pos);
+        customViewHolder.textView.setText(Html.fromHtml(item.name));
         customViewHolder.base.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +87,10 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
 
        // customViewHolder.root.getLayoutParams().height = utl.getRandomIntInRange(250,75);
 
+        if(item.pathThumb.contains("-"))
+            customViewHolder.icon.setImageResource(R.drawable.vd_pdf);
+        else
+            Picasso.with(mContext).load(item.pathThumb).placeholder(R.drawable.ic_launcher).into(customViewHolder.icon);
 
         customViewHolder.base.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -135,7 +141,7 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
         }
     }
 
-    public void click(int pos, BoxFilesAdapterH.Dummy cat)
+    public void click(int pos, BoxFile cat)
     {
 
 
@@ -151,24 +157,6 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
 
     }
 
-
-    public static class Dummy extends BoxFile
-    {
-        String data="TEST";
-        public Dummy(int i)
-        {
-
-        }
-
-        public Dummy( )
-        {}
-
-        public String getData(int i)
-        {
-            return "Bucket No "+i;
-        }
-
-    }
 
 
 

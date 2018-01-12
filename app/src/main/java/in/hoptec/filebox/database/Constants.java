@@ -60,6 +60,14 @@ public class Constants {
     }
 
 
+
+    public static String getDBFile()
+    {
+        folder = Environment.getExternalStorageDirectory().getPath().toString()+"/."+ utl.refineString(ctx.getResources().getString(R.string.app_name),"");
+        return folder+"/"+FILE_DB;
+    }
+
+
     public static String userDataFile()
     {
         folder = Environment.getExternalStorageDirectory().getPath().toString()+"/."+ utl.refineString(ctx.getResources().getString(R.string.app_name),"");
