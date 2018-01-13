@@ -81,7 +81,8 @@ public class utl {
 
 
     public static boolean DISPLAY_ENABLED=true;
-    public static boolean DEBUG_ENABLED=true;
+    public static boolean FILE2URI_DEBUG_ENABLED =false;
+    public static boolean DEBUG_ENABLED =true;
 
     public static Gson js=new Gson();
 
@@ -295,6 +296,15 @@ public class utl {
     private boolean isValidMail(String email)
     {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    public static String dateFromLong(long TimeinMilliSeccond)
+    {
+
+        String dateString = new SimpleDateFormat("MM/dd/yyyy").format(new Date(TimeinMilliSeccond));
+
+        return dateString;
+
     }
 
     public static String getTime() {
@@ -811,6 +821,240 @@ public class utl {
 
     }
 
+
+    public static String getFileName(String filePath) {
+        return   filePath.substring(filePath.lastIndexOf("/")+1);
+
+    }
+
+
+    public static String getFileExt(String filePath) {
+        return filePath.substring(filePath.lastIndexOf(".") + 1, filePath.length());
+    }
+
+
+    public static String  pathFromURI(Activity act,Uri uri)
+    {
+
+        String path = "";
+        File file=null;
+        boolean worked=false;
+
+
+        try{
+
+            if(!worked){
+
+
+                path = RealPathUtils.getRealPathFromURI_BelowAPI11(act, uri);
+
+                file=new File(path);
+                if(file!=null){
+
+                    if(file.length()>1){
+                        worked=true;
+
+                        if(FILE2URI_DEBUG_ENABLED)
+                            utl.e("URI to File Method getRealPathFromURI_BelowAPI11   work");
+
+
+                    }
+
+                }
+
+            }else {
+                return path;
+            }
+
+
+        }catch (Exception e)
+        {
+
+            if(FILE2URI_DEBUG_ENABLED)
+                utl.e("URI to File Method getRealPathFromURI_BelowAPI11 Didn't work");
+        }
+        /**************OTHER METHOD************/
+
+        try{
+
+            if(!worked){
+
+
+                path = RealPathUtils.getRealPathFromURI_API11to18(act, uri);
+
+                file=new File(path);
+                if(file!=null){
+
+                    if(file.length()>1){
+                        worked=true;
+
+                        if(FILE2URI_DEBUG_ENABLED)
+                            utl.e("URI to File Method getRealPathFromURI_API11to18   work");
+
+
+                    }
+
+                }
+
+            }else {
+                return path;
+            }
+
+
+        }catch (Exception e)
+        {
+
+            if(FILE2URI_DEBUG_ENABLED)
+                utl.e("URI to File Method getRealPathFromURI_API11to18 Didn't work");
+        }
+        /**************OTHER METHOD************/
+
+        try{
+
+            if(!worked){
+
+
+                path = RealPathUtils.getRealPathFromURI_API19(act, uri);
+
+                file=new File(path);
+                if(file!=null){
+
+                    if(file.length()>1){
+                        worked=true;
+
+                        if(FILE2URI_DEBUG_ENABLED)
+                            utl.e("URI to File Method getRealPathFromURI_API19   work");
+
+
+                    }
+
+                }
+
+            }else {
+                return path;
+            }
+
+
+        }catch (Exception e)
+        {
+
+            if(FILE2URI_DEBUG_ENABLED)
+                utl.e("URI to File Method getRealPathFromURI_API19 Didn't work");
+        }
+        /**************OTHER METHOD************/
+
+        try{
+
+            if(!worked){
+
+
+                path =FileUtils.getPath(act, uri);
+
+                file=new File(path);
+                if(file!=null){
+
+                    if(file.length()>1){
+                        worked=true;
+
+                        if(FILE2URI_DEBUG_ENABLED)
+                            utl.e("URI to File Method FileUtils.getPath   work");
+
+
+                    }
+
+                }
+
+            }else {
+                return path;
+            }
+
+
+        }catch (Exception e)
+        {
+
+            if(FILE2URI_DEBUG_ENABLED)
+                utl.e("URI to File Method FileUtils.getPath Didn't work");
+        }
+        /**************OTHER METHOD************/
+
+
+
+        try{
+
+            if(!worked){
+
+
+                path=getRealPathFromUri(uri);
+
+                file=new File(path);
+                if(file!=null){
+
+                    if(file.length()>1){
+                        worked=true;
+
+                        if(FILE2URI_DEBUG_ENABLED)
+                            utl.e("URI to File Method getRealPathFromUri   work");
+
+
+                    }
+
+                }
+
+            }else {
+                return path;
+            }
+
+
+        }catch (Exception e)
+        {
+
+            if(FILE2URI_DEBUG_ENABLED)
+                utl.e("URI to File Method getRealPathFromUri Didn't work");
+        }
+        /**************OTHER METHOD************/
+        try{
+
+            if(!worked){
+
+
+                path=(uri.toString()).replace("file://","");
+
+                file=new File(path);
+                if(file!=null){
+
+                    if(file.length()>1){
+
+
+                        if(FILE2URI_DEBUG_ENABLED)
+                            utl.e("URI to File Method replace   work");
+                        return path;
+
+                    }
+
+                }
+
+            }else {
+                return path;
+            }
+
+
+        }catch (Exception e)
+        {
+
+            if(FILE2URI_DEBUG_ENABLED)
+                utl.e("URI to File Method replace Didn't work");
+        }
+        /**************OTHER METHOD************/
+
+
+            utl.e("No URI to File Method work RETURNING URI :'-( ");
+
+        /**************OTHER METHOD************/
+
+
+
+        return uri.toString();
+    }
 
     public static String getRealPathFromUri(Uri uri) {
         String result = null;

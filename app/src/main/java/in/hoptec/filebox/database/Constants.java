@@ -43,7 +43,15 @@ public class Constants {
         {
             file.mkdir();
         }
-    }
+
+        File thumbs=new File(getFolder()+"/thumbs");
+        if(!thumbs.exists())
+        {
+            thumbs.mkdir();
+        }
+
+
+     }
 
     private static String FIRE_BASE="https://test-a0930.firebaseio.com/";
 

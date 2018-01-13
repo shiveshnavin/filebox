@@ -18,18 +18,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-
-import java.io.File;
 import java.util.ArrayList;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapterRec;
 import in.hoptec.filebox.database.Box;
-import in.hoptec.filebox.database.BoxFile;
-import in.hoptec.filebox.database.BoxMeta;
-import in.hoptec.filebox.database.Constants;
-import in.hoptec.filebox.utils.FileOperations;
 import in.hoptec.filebox.utils.utl;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;

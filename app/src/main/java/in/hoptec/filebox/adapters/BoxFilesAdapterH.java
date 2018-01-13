@@ -49,7 +49,7 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
 
         final int pos=customViewHolder.getAdapterPosition();
         final BoxFile item=feedItemList.get(pos);
-        customViewHolder.textView.setText(Html.fromHtml(item.name));
+        customViewHolder.textView.setText(Html.fromHtml(""+item.name));
         customViewHolder.base.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,7 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
 
        // customViewHolder.root.getLayoutParams().height = utl.getRandomIntInRange(250,75);
 
-        if(item.pathThumb.equals("-"))
+        if(item.pathThumb.contains("---"))
             customViewHolder.icon.setImageResource(R.drawable.vd_pdf);
         else{
             utl.e("Img : "+item.pathThumb);
