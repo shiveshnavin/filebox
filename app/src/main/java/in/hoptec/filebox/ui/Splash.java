@@ -122,7 +122,7 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
 
-                if(utl.getKey("firstinstall",ctx)==null )
+                if(utl.getKey("firstinstall",ctx)==null||true )
                 {
 
                     if (drawable instanceof Animatable) {
@@ -203,7 +203,7 @@ public class Splash extends AppCompatActivity {
     Integer dur=1000;
     public static  HelpPagerAdapter pageAdapter;
     String curSt="#ffff5252";
-    public static String  colorsS [] ={"#ffc53929","#ff0b8043","#ff3367d6"};
+    public static String  colorsS [] ={"#ffc53929","#ff0b8043","#ff3367d6","#ff90a4ae"};
     public void setUpIntro()
     {
 
@@ -218,7 +218,8 @@ public class Splash extends AppCompatActivity {
 
         colors.add(R.color.material_deep_orange_700);
         colors.add(R.color.material_green_700);
-        colors.add(R.color.material_blue_700);
+        colors.add(R.color.material_blue_grey_300);
+        colors.add(R.color.material_blue_grey_300);
 
 
         List<Fragment> fragments = getFragments();
@@ -258,6 +259,11 @@ public class Splash extends AppCompatActivity {
                         utl.animateBackGround(bg,curSt,colorsS[2],false,dur);
                         curSt=colorsS[2];
 
+                    case 3:
+                        utl.animateBackGround(bg,curSt,colorsS[3],false,dur);
+                        curSt=colorsS[3];
+
+
                         break;
                 }
 
@@ -283,11 +289,22 @@ public class Splash extends AppCompatActivity {
 
         frag.image=R.drawable.ic_help_animated_file;
         frag.message="No more storming your gallery to find files ," +
-                " Organise your documents and Images in buckets to reach easily .";
+                " Organise your documents and Images in buckets to reach easily . Group same files in multiple buckets as well .";
         frag.islast=false;
         frag.pos=0;
         frag.clr=colors.get(0);
          fList.add(frag);
+        /***/
+        frag=new Help_Fr0();
+
+        frag.image=R.drawable.vd_share_many;
+        frag.message="Now Share Files over wifi to Multiple User at once !";
+        frag.islast=false;
+        frag.pos=1;
+        frag.clr=colors.get(1);
+        fList.add(frag);
+
+
 
         /***/
         frag=new Help_Fr0();
@@ -295,8 +312,8 @@ public class Splash extends AppCompatActivity {
         frag.image=R.drawable.ic_help_animated_lock;
         frag.message="Hide you private Files and Photos with smart lock from Gallery and Spy Apps.";
         frag.islast=false;
-        frag.pos=1;
-        frag.clr=colors.get(1);
+        frag.pos=2;
+        frag.clr=colors.get(2);
          fList.add(frag);
 
 
@@ -306,8 +323,8 @@ public class Splash extends AppCompatActivity {
         frag.image=R.drawable.ic_help_animated_cloud;
         frag.message="Save important files on Cloud with Easy Sharing !";
         frag.islast=true;
-        frag.pos=2;
-        frag.clr=colors.get(2);
+        frag.pos=3;
+        frag.clr=colors.get(3);
          fList.add(frag);
 
 

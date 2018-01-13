@@ -1,10 +1,13 @@
 package in.hoptec.filebox.adapters;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -13,18 +16,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.database.BoxFile;
 import in.hoptec.filebox.database.Constants;
+import in.hoptec.filebox.ui.ImageViewAct;
 import in.hoptec.filebox.utils.utl;
 
 
@@ -161,8 +169,34 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
     public void click(int pos, BoxFile cat)
     {
 
+        if(cat.path.contains("png")||cat.path.contains("jpg")){
+
+        Intent it=new Intent(mContext, ImageViewAct.class);
+        it.putExtra("img",cat.path);
+        mContext.startActivity(it);
+
+        }
+        else {
+
+            try {
+                utl.openFile(mContext, new File(cat.path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
+          /*     Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(cat.path)));
+            intent.setType("multipart/");
+            mContext.startActivity(intent);
+
+         Intent myIntent = new Intent(Intent.ACTION_VIEW);
+            myIntent.setData(Uri.fromFile(new File(cat.path)));
+            Intent j = Intent.createChooser(myIntent, "Open With :");
+            mContext.startActivity(j);
+*/
+        }
 
 
     }

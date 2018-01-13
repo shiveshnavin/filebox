@@ -23,16 +23,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rec"
-            android:layout_below="@+id/search_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-
-
-
-        </android.support.v7.widget.RecyclerView>
 
         <RelativeLayout
             android:id="@+id/sort_cont"
@@ -78,11 +69,23 @@
             />
 
         <include
+            android:id="@+id/search_layout"
             android:layout_below="@+id/vv"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             layout="@layout/include_search_view" />
 
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec"
+            android:layout_below="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+        </android.support.v7.widget.RecyclerView>
         <com.daniribalbert.customfontlib.views.CustomFontTextView
             app:font="Avenir-Medium"
             android:id="@+id/logs"

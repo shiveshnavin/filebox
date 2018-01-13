@@ -104,6 +104,14 @@ public class Home extends BaseActivity {
 
         box_list=db.getBoxes();
         setUpBoxes();
+
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                utl.hideSoftKeyboard(act);
+            }
+        },100);
     }
     ArrayList<Box> box_list =new ArrayList<>();
 
@@ -254,6 +262,7 @@ public class Home extends BaseActivity {
 
     private void setUpBoxes()
     {
+        boxe_r.removeAllViews();
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false);
         boxe_r.setLayoutManager(mLayoutManager);
 
@@ -316,10 +325,12 @@ public class Home extends BaseActivity {
 
         LandingAnimator animator = new LandingAnimator(new OvershootInterpolator(1f));
         boxe_r.setItemAnimator(animator);
+        boxe_r.setHasFixedSize(true);
         SlideInBottomAnimationAdapter alphaAdapter = new SlideInBottomAnimationAdapter(boxAdapter);
         alphaAdapter.setDuration(1000);
         boxe_r.setNestedScrollingEnabled(false);
         boxe_r.setAdapter(alphaAdapter);
+
 
 
 
