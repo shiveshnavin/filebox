@@ -4,177 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/nest"
-    android:background="@color/white"
     android:overScrollMode="never"
-
-    android:paddingTop="@dimen/home_v_margin"
+    android:background="@color/white"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    >
+    tools:showIn="@layout/activity_home">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:id="@+id/content_home"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"  >
-
-    <LinearLayout
-        android:background="@color/white"
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <com.daniribalbert.customfontlib.views.CustomFontTextView
-            android:layout_width="match_parent"
-            android:layout_margin="7dp"
-             android:layout_height="wrap_content"
-            app:font="Roboto-Regular"
-            android:gravity="left"
-            android:text="Files"
-            android:textColor="@color/colorAccent_text"
-            android:id="@+id/no_files"
-            android:textSize="15sp" />
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:src="@drawable/avd_plus_to_cross"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/wifi3"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/files"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/rec"
+            android:layout_below="@+id/search_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical">
+            android:layout_height="wrap_content">
+
+
 
 
         </android.support.v7.widget.RecyclerView>
 
-
-    </LinearLayout>
-
-
-
-    <View
-        android:layout_marginTop="5dp"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"/>
-
-
-        <LinearLayout
-
-            android:orientation="vertical"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:id="@+id/sort_cont"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
             >
 
-            <LinearLayout
-                android:weightSum="1"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                >
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.9"
-                    android:textColorHint="@color/colorAccent"
-
-                    app:hintAnimationEnabled="true"
-                    app:hintEnabled="true"
-                    android:layout_height="wrap_content">
-
-                    <com.daniribalbert.customfontlib.views.CustomFontEditText
-                        android:layout_margin="10dp"
-                        android:hint="Name a new box "
-                        android:textSize="13sp"
-                        android:singleLine="true"
-                        android:imeActionLabel="ADD"
-                        android:maxLines="1"
-                        android:id="@+id/box_name"
-                        android:imeOptions="actionGo"
-                        android:textColor="@color/grey_800"
-                        app:font="Roboto-Regular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <ImageView
-                    android:layout_weight="0.1"
-                    android:src="@drawable/avd_plus_to_chk"
-                    android:id="@+id/add"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent" />
-
-
-            </LinearLayout>
-
-
-            <View
-                android:layout_marginTop="5dp"
-                android:background="@color/colorAccent"
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"/>
-
-
-
-
             <com.daniribalbert.customfontlib.views.CustomFontTextView
-                android:layout_width="match_parent"
-                android:layout_weight="0.8"
-                android:layout_height="0dp"
-                android:layout_margin="5dp"
-
                 app:font="Avenir-Medium"
-                android:gravity="left"
-                android:text="SELECTED BOXES"
-                android:textColor="@color/colorAccent_text"
-                android:textSize="14sp" />
+                android:padding="10dp"
+                android:id="@+id/app"
+                android:textColor="@color/colorAccent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="My Boxes"
+                android:layout_centerHorizontal="true"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/boxes_added"
-                android:background="@color/white"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
-
-
-            <View
-                android:layout_marginTop="5dp"
-                android:background="@color/colorAccent"
-                android:layout_width="match_parent"
-                android:layout_height="0.1dp"/>
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                layout="@layout/include_search_view" />
-
-
-            <com.daniribalbert.customfontlib.views.CustomFontTextView
-                android:layout_width="match_parent"
+            <ImageView
                 android:layout_margin="5dp"
-                android:layout_weight="0.8"
-                android:layout_height="0dp"
-                app:font="Avenir-Medium"
-                android:gravity="left"
-                android:text="OR SELECT BOXES TO PUT FILE(S) IN"
-                android:textColor="@color/colorAccent_text"
-                android:textSize="14sp" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/boxes"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:id="@+id/sort"
+                android:src="@drawable/avd_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
-</LinearLayout>
 
 
+
+        </RelativeLayout>
+
+
+        <View
+            android:id="@+id/vv"
+            android:layout_below="@+id/sort_cont"
+            android:layout_margin="5dp"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            />
+
+        <include
+            android:layout_below="@+id/vv"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            layout="@layout/include_search_view" />
+
+        <com.daniribalbert.customfontlib.views.CustomFontTextView
+            app:font="Avenir-Medium"
+            android:id="@+id/logs"
+            android:visibility="gone"
+            android:layout_below="@+id/vv"
+
+            android:padding="15dp"
+            android:textColor="@color/grey_600"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:text="[START]"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/swipe"
+            >
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

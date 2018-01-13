@@ -107,7 +107,7 @@ public class Home extends BaseActivity {
 
 
 
-        readDB();
+        setUpBoxes(readDB());
     }
     ArrayList<Box> box_list =new ArrayList<>();
 
@@ -241,7 +241,7 @@ public class Home extends BaseActivity {
                 overridePendingTransition(R.anim.act_fade_in, R.anim.act_fade_out);
 
             }
-        },200);
+        },20);
 
     }
 

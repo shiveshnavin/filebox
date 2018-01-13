@@ -224,7 +224,7 @@
 
 
         <include
-            layout="@layout/fragment_home"
+            layout="@layout/content_home"
             android:id="@+id/include" />
 
         <android.support.design.widget.FloatingActionButton

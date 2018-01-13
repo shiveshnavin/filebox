@@ -1,4 +1,4 @@
-package in.hoptec.filebox.adapters;
+package in.hoptec.filebox.utils;
 
 import android.content.Context;
 import android.content.res.Resources;

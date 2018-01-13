@@ -34,7 +34,7 @@
 
 
 
-    <include layout="@layout/content_home" />
+    <include layout="@layout/content_add_box" />
 
 
     <android.support.design.widget.FloatingActionButton
