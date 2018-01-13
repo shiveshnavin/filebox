@@ -135,7 +135,7 @@ public class BoxFile {
 
             Bitmap thumbnail = BitmapFactory.decodeFile(file.getAbsolutePath(), bitmapOptions);
 
-            pathThumb=Constants.getFolder()+"/thumbs/"+ utl.refineString(name,"_");
+            pathThumb=Constants.getFolder()+"/thumbs/"+ utl.refineString(name,"_").replace("_"+type,"."+type);
             File thumbnailFile =new File(pathThumb);
             try {
                 FileOutputStream fos = new FileOutputStream(thumbnailFile);

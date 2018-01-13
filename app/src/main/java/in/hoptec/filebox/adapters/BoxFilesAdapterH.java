@@ -17,7 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -91,14 +92,19 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
 
        // customViewHolder.root.getLayoutParams().height = utl.getRandomIntInRange(250,75);
 
-        if(item.pathThumb.contains("---"))
+        if(item.pathThumb.contains("---")) {
+
+
             customViewHolder.icon.setImageResource(R.drawable.vd_pdf);
+
+
+        }
         else{
             utl.e("Img : "+item.pathThumb);
-            Bitmap bm= BitmapFactory.decodeFile(item.pathThumb);
+           // Bitmap bm= BitmapFactory.decodeFile(item.pathThumb);
 
-            customViewHolder.icon.setImageBitmap(bm);
-            //Picasso.with(mContext).load(path).error(R.drawable.vd_pdf).into(customViewHolder.icon);
+           // customViewHolder.icon.setImageBitmap(bm);
+            Glide.with(mContext).load(item.pathThumb).into(customViewHolder.icon);
 
         }
 
