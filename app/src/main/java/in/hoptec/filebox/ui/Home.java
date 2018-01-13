@@ -1,7 +1,9 @@
 package in.hoptec.filebox.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -17,14 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import in.hoptec.filebox.R;
-import in.hoptec.filebox.adapters.BoxesAdapter;
-import in.hoptec.filebox.adapters.BoxesAdapterH;
 import in.hoptec.filebox.adapters.BoxesAdapterRec;
 import in.hoptec.filebox.database.Box;
 import in.hoptec.filebox.database.BoxFile;
@@ -59,6 +58,8 @@ public class Home extends BaseActivity {
     private long FAB_ANIM_DUR=400;
     private boolean LOG_UP=false;
 
+    private Handler h;
+
 
 
     @Override
@@ -80,7 +81,7 @@ public class Home extends BaseActivity {
         sort=(ImageView) findViewById(R.id.sort);
         boxe_r = (RecyclerView) findViewById(R.id.rec);
        // appBarHeight=utl.pxFromDp(ctx,170).intValue();
-
+        h=new Handler();
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -319,8 +320,8 @@ public class Home extends BaseActivity {
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                connect();
-                utl.animate_avd((ImageView) connectButton.findViewById(R.id.iop0));
+                addToBox();
+               // utl.animate_avd((ImageView) connectButton.findViewById(R.id.iop0));
 
             }
         });
@@ -355,7 +356,7 @@ public class Home extends BaseActivity {
             public void onClick(View view) {
 
 
-                connect();
+                addToBox();
 
             }
         });
@@ -429,9 +430,19 @@ public class Home extends BaseActivity {
 
 
 
-    private void connect()
+    private void addToBox()
     {
 
+        h.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                Intent it=new Intent(ctx,AddBox.class);
+                startActivity(it);
+                overridePendingTransition(R.anim.act_fade_in, R.anim.act_fade_out);
+
+            }
+        },200);
 
     }
 

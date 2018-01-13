@@ -23,6 +23,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.65"
             android:id="@+id/icon"
+            android:scaleType="fitXY"
             android:background="@drawable/round_filled"
             android:src="@drawable/ic_launcher"
             android:layout_width="50dp"

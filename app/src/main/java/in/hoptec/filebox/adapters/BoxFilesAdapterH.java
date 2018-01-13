@@ -1,6 +1,8 @@
 package in.hoptec.filebox.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +23,8 @@ import java.util.List;
 
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.database.BoxFile;
+import in.hoptec.filebox.database.Constants;
+import in.hoptec.filebox.utils.utl;
 
 
 public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.CustomViewHolder> {
@@ -87,10 +91,17 @@ public class BoxFilesAdapterH extends  RecyclerView.Adapter<BoxFilesAdapterH.Cus
 
        // customViewHolder.root.getLayoutParams().height = utl.getRandomIntInRange(250,75);
 
-        if(item.pathThumb.contains("-"))
+        if(item.pathThumb.equals("-"))
             customViewHolder.icon.setImageResource(R.drawable.vd_pdf);
-        else
-            Picasso.with(mContext).load(item.pathThumb).placeholder(R.drawable.ic_launcher).into(customViewHolder.icon);
+        else{
+            utl.e("Img : "+item.pathThumb);
+            Bitmap bm= BitmapFactory.decodeFile(item.pathThumb);
+
+            customViewHolder.icon.setImageBitmap(bm);
+            //Picasso.with(mContext).load(path).error(R.drawable.vd_pdf).into(customViewHolder.icon);
+
+        }
+
 
         customViewHolder.base.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
