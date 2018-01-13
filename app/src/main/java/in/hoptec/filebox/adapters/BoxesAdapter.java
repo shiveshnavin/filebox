@@ -23,10 +23,10 @@ import in.hoptec.filebox.database.BoxMeta;
 
 
 public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHolder> {
-    private List<Dummy> feedItemList;
+    private List<Box> feedItemList;
     private Context mContext;
 
-    public BoxesAdapter(Context context, List<Dummy> feedItemList) {
+    public BoxesAdapter(Context context, List<Box> feedItemList) {
         this.feedItemList = feedItemList;
         this.mContext = context;
     }
@@ -43,8 +43,8 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
     public void onBindViewHolder(final CustomViewHolder customViewHolder, final int i) {
 
         final int pos=customViewHolder.getAdapterPosition();
-        final Dummy item=feedItemList.get(pos);
-        customViewHolder.textView.setText(Html.fromHtml(item.boxData.id));
+        final Box item=feedItemList.get(pos);
+        customViewHolder.textView.setText(Html.fromHtml(item.boxData.name));
         customViewHolder.base.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +137,7 @@ public class BoxesAdapter extends RecyclerView.Adapter<BoxesAdapter.CustomViewHo
     }
 
 
-    public void click(int pos, BoxesAdapter.Dummy cat)
+    public void click(int pos, Box cat)
     {
 
 
