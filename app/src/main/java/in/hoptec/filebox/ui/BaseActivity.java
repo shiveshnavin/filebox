@@ -33,6 +33,7 @@ import in.hoptec.filebox.database.Box;
 import in.hoptec.filebox.database.BoxFile;
 import in.hoptec.filebox.database.BoxMeta;
 import in.hoptec.filebox.database.Constants;
+import in.hoptec.filebox.database.HeadLessDB;
 import in.hoptec.filebox.utils.FileOperations;
 import in.hoptec.filebox.utils.utl;
 
@@ -49,6 +50,8 @@ public class BaseActivity  extends AppCompatActivity {
     public Context ctx;
     public Activity act;
 
+    public HeadLessDB db;
+
     public void initBase()
     {
         ctx=this;
@@ -56,6 +59,8 @@ public class BaseActivity  extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        db=new HeadLessDB();
+        db.init();
 
         initNavigationDrawer();
 
@@ -220,47 +225,8 @@ public class BaseActivity  extends AppCompatActivity {
 
     }
 
+/*
 
-    public ArrayList<Box> readDB()
-    {
-
-        ArrayList<Box> box_list;
-        box_list=new ArrayList<>();
-
-        File db=new File(Constants.getDBFile());
-        if(db.exists()){
-            FileOperations f=new FileOperations();
-            try {
-
-                utl.e("Reading DB from Device ");
-                JSONArray jar=new JSONArray(f.read(Constants.getDBFile()));
-                for(int i=0;i<jar.length();i++){
-
-                    Box bx=utl.js.fromJson(jar.get(i).toString(),Box.class);
-                    box_list.add(bx);
-                    utl.e("Adding "+bx.boxData.name);
-
-
-
-                }
-
-
-                return  (box_list);
-            } catch (Exception e) {
-
-
-                e.printStackTrace();
-                return  (box_list);
-
-            }
-        }
-        else {
-            return generate();
-        }
-
-
-
-    }
     public ArrayList<Box> generate()
     {
         utl.e("Creating DB on Device ");
@@ -320,7 +286,9 @@ public class BaseActivity  extends AppCompatActivity {
         bx.files.add(file);
         box_list.add(bx);
 
-        /************/
+        */
+/************//*
+
         bx=new Box();
         bx.boxData=new BoxMeta();
         bx.files=new ArrayList<>();
@@ -351,7 +319,9 @@ public class BaseActivity  extends AppCompatActivity {
 
 
 
-        /************/
+        */
+/************//*
+
         bx=new Box();
         bx.boxData=new BoxMeta();
         bx.files=new ArrayList<>();
@@ -382,8 +352,12 @@ public class BaseActivity  extends AppCompatActivity {
 
 
 
-        /************/
-        /************/
+        */
+/************//*
+
+        */
+/************//*
+
         bx=new Box();
         bx.boxData=new BoxMeta();
         bx.files=new ArrayList<>();
@@ -420,7 +394,9 @@ public class BaseActivity  extends AppCompatActivity {
         file.pathThumb="-";
         bx.files.add(file);
         box_list.add(bx);
-        /************/
+        */
+/************//*
+
 
         FileOperations fop=new FileOperations();
         fop.write(Constants.getDBFile(),utl.js.toJson(box_list));
@@ -430,6 +406,7 @@ public class BaseActivity  extends AppCompatActivity {
 
     }
 
+*/
 
 
 

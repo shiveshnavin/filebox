@@ -96,9 +96,9 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
        // customViewHolder.root.getLayoutParams().height = utl.getRandomIntInRange(250,75);
 
 
-        customViewHolder.base.setOnLongClickListener(new View.OnLongClickListener() {
+        customViewHolder.del.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public void onClick(View view) {
 
 
 
@@ -109,12 +109,12 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
                 }
 
 
-                clickLong(pos);
-                return true;
+                delClick(pos,item);
+
+
+
             }
         });
-
-
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false);
         customViewHolder.files.setLayoutManager(mLayoutManager);
@@ -178,6 +178,15 @@ public class BoxesAdapterRec extends RecyclerView.Adapter<BoxesAdapterRec.Custom
 
 
         }
+    }
+
+    public void delClick(int pos, Box cat)
+    {
+
+
+
+
+
     }
 
 

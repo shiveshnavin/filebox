@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import in.hoptec.filebox.R;
 import in.hoptec.filebox.adapters.BoxesAdapterRec;
 import in.hoptec.filebox.database.Box;
+import in.hoptec.filebox.database.HeadLessDB;
+import in.hoptec.filebox.utils.GenricCallback;
 import in.hoptec.filebox.utils.utl;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
@@ -100,7 +102,8 @@ public class Home extends BaseActivity {
 
 
 
-        setUpBoxes(readDB());
+        box_list=db.getBoxes();
+        setUpBoxes();
     }
     ArrayList<Box> box_list =new ArrayList<>();
 
@@ -249,7 +252,7 @@ public class Home extends BaseActivity {
     }
 
 
-    private void setUpBoxes(ArrayList<Box> box_list)
+    private void setUpBoxes()
     {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false);
         boxe_r.setLayoutManager(mLayoutManager);
@@ -257,6 +260,45 @@ public class Home extends BaseActivity {
 
 
         BoxesAdapterRec boxAdapter = new BoxesAdapterRec(ctx, box_list){
+
+            @Override
+            public void delClick(int pos, final Box cat)
+            {
+
+                super.delClick(pos,cat);
+                utl.snack(act, "Remove box (Dosent affect files) ?", "DELETE", new GenricCallback() {
+                    @Override
+                    public void onStart() {
+
+                        HeadLessDB db1=new HeadLessDB();
+                        db1.init();
+                        db1.removeBox(cat);
+                        box_list=db.getBoxes();
+
+                        setUpBoxes();
+
+                    }
+
+                    @Override
+                    public void onDo(Object obj) {
+
+                    }
+
+                    @Override
+                    public void onDo(Object obj, Object obj2) {
+
+                    }
+
+                    @Override
+                    public void onDone(Object obj) {
+
+                    }
+                });
+
+
+
+            }
+
 
             @Override
             public void click(final int pos,final Box cat) {

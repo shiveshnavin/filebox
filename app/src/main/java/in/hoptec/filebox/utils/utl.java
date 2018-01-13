@@ -81,7 +81,7 @@ public class utl {
 
 
     public static boolean DISPLAY_ENABLED=true;
-    public static boolean FILE2URI_DEBUG_ENABLED =false;
+    public static boolean FILE2URI_DEBUG_ENABLED =true;
     public static boolean DEBUG_ENABLED =true;
 
     public static Gson js=new Gson();
@@ -984,7 +984,7 @@ public class utl {
             if(!worked){
 
 
-                path=getRealPathFromUri(uri);
+                path=getRealPathFromUri(act,uri);
 
                 file=new File(path);
                 if(file!=null){
@@ -1056,7 +1056,7 @@ public class utl {
         return uri.toString();
     }
 
-    public static String getRealPathFromUri(Uri uri) {
+    public static String getRealPathFromUri(Context ctx,Uri uri) {
         String result = null;
         try {
             if(uri==null)
@@ -1077,7 +1077,7 @@ public class utl {
                 result = imageCursor.getString(imageCursor.getColumnIndex(mediaPath));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         if(result==null)
             result=uri.getPath().replace("file://","").replace("%20"," ");

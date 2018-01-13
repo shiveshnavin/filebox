@@ -46,10 +46,10 @@ public class BoxFile {
         {
 
 
-
             path=pat;
             id=""+ System.currentTimeMillis();
-            if(path!=null){
+            File f=new File(path);
+            if(f.exists()){
 
                 try {
                     name=utl.getFileName(path);
@@ -64,7 +64,15 @@ public class BoxFile {
                     e.printStackTrace();
                 }
 
+
             }
+            else {
+
+                name=utl.getFileName(path);
+
+
+            }
+
 
 
         }

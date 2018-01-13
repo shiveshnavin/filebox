@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,6 +64,17 @@ public class AddBox extends BaseActivity {
             public void onClick(View view) {
 
 
+                for (Box b:box_added) {
+
+                    db.addFilesToBox(box_files,b);
+
+
+                }
+                Intent it=new Intent(ctx,Home.class);
+                startActivity(it);
+                overridePendingTransition(R.anim.act_fade_in, R.anim.act_fade_out);
+                finish();
+
             }
         });
         fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.material_green_500)));
@@ -104,7 +116,11 @@ public class AddBox extends BaseActivity {
                     String bx = box_name.getText().toString();
                     BoxesAdapter.Dummy dm = new BoxesAdapter.Dummy();
                     dm.boxData = new BoxMeta();
-                    dm.boxData.id = bx;
+                    dm.boxData.id = ""+System.currentTimeMillis();
+                    dm.boxData.name=bx;
+                    dm.boxData.dateTime=utl.getDate();
+                    dm.boxData.countUse=0;
+
                     box_added.add(dm);
 
                     boxAddAdapter.notifyItemInserted(boxAddAdapter.getItemCount() - 1);
@@ -146,7 +162,10 @@ public class AddBox extends BaseActivity {
 
 
         box_list = new ArrayList<>();
-        box_list = readDB();
+        box_list = db.getBoxes();
+
+
+
        /* int i=0;
         do {
             box_list.add(new BoxesAdapter.Dummy(i));
@@ -223,7 +242,7 @@ public class AddBox extends BaseActivity {
         boxesAddedRec.setAdapter(alphaAdapter2);
 
 
-        setUpFileList(readDB().get(0).files);
+        //setUpFileList(readDB().get(0).files);
 
 
     }
@@ -319,26 +338,21 @@ public class AddBox extends BaseActivity {
         Uri imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
         if (imageUri != null) {
 
-            utl.e("URI is : "+imageUri.toString()+" \nPath is : "+utl.pathFromURI(act,imageUri));
-            BoxFile file=new BoxFile(utl.pathFromURI(act,imageUri));
-            box_files.add(file);
+            addToBox(imageUri);
 
-            setUpFileList(box_files);
         }
+
+        setUpFileList(box_files);
+
     }
 
     void handleSendMultipleImages(Intent intent) {
         ArrayList<Uri> imageUris = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
         if (imageUris != null) {
 
-            for (Uri u:imageUris) {
+            for (Uri imageUri:imageUris) {
 
-                utl.e("URI is : "+u.toString()+" \nPath is : "+utl.pathFromURI(act,u));
-                BoxFile file=new BoxFile(utl.pathFromURI(act,u));
-
-                 utl.l(utl.js.toJson(file));
-                 box_files.add(file);
-
+                addToBox(imageUri);
             }
 
             setUpFileList(box_files);
@@ -348,4 +362,18 @@ public class AddBox extends BaseActivity {
 
         }
     }
+
+    public void addToBox(Uri imageUri)
+    {
+
+        String path=utl.pathFromURI(act,imageUri);
+        utl.e("URI is : "+imageUri.toString()+" \nPath is : "+path);
+        BoxFile file=new BoxFile(path);
+
+        utl.l(utl.js.toJson(file));
+        box_files.add(file);
+
+
+    }
+
 }

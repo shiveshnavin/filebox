@@ -13,6 +13,27 @@ public class Box {
 
 
 
+    public void add(BoxFile f)
+    {
+
+        boolean isUniq=true;
+        for (BoxFile fi:files
+             ) {
+
+            if(fi.path.equals(f.path))
+            {
+                isUniq=false;
+            }
+
+
+        }
+
+        if(isUniq)
+        {
+            files.add(f);
+        }
+
+    }
 
 
 }
